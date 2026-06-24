@@ -208,6 +208,37 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .lesson .summary .en{display:block;font-family:'Manrope';font-style:normal;color:var(--muted);font-size:13.5px;margin-top:6px}
 .lesson .who{margin-top:11px;font-size:13px;color:var(--muted-2)}
 .lesson .who b{color:var(--ink);font-weight:700}
+.teacher-row{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line);font-size:14px;color:var(--ink)}
+.teacher-row svg{width:17px;height:17px;color:var(--gold);flex:0 0 auto}
+.teacher-row .tl{color:var(--muted-2);font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.teacher-row .tv{font-weight:700;color:var(--cream)}
+.teacher-row .tv.empty{color:var(--muted-2);font-weight:500}
+
+/* lesson edit form */
+.ledit{display:grid;gap:11px}
+.ledit .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ledit .one{display:grid;gap:5px}
+.ledit label{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-dim)}
+.ledit input,.ledit textarea{width:100%;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:9px;padding:9px 11px;font-family:inherit;font-size:14px;resize:vertical}
+.ledit textarea{min-height:60px}
+.ledit input:focus,.ledit textarea:focus{border-color:var(--gold-dim);background:#0b1521}
+.ledit .teach{background:#11243a;border:1px solid var(--line-solid);border-radius:10px;padding:11px 13px}
+.ledit .del{justify-self:start;margin-top:2px;border:1px solid #5a2f2f;background:#2a1414;color:#e7a3a3;font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:10px;display:inline-flex;align-items:center;gap:7px}
+.ledit .del:hover{background:#3a1a1a}
+.ledit .del svg{width:14px;height:14px}
+.add-lesson{width:100%;margin-top:14px;border:1.5px dashed var(--line-solid);background:#0f1d2e;color:var(--gold-soft);font-weight:700;font-size:14px;padding:15px;border-radius:13px;display:flex;align-items:center;justify-content:center;gap:9px}
+.add-lesson:hover{border-color:var(--gold-dim)}
+.add-lesson svg{width:18px;height:18px}
+.notebar input,.notebar textarea{width:100%;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:8px;padding:8px 10px;font-family:inherit;font-size:13.5px;margin-top:6px;resize:vertical}
+
+/* handbook guidance card */
+.guide{display:flex;gap:14px;align-items:flex-start;margin:14px 0 8px;padding:18px 20px;border-radius:13px;border:1px solid var(--line-solid);background:linear-gradient(120deg,#16273e,#101d2e)}
+.guide .gref{flex:0 0 auto;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1a1206;background:var(--gold);border-radius:9px;padding:5px 10px;letter-spacing:.02em}
+.guide .gtitle{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream)}
+.guide .gtitle .en{display:block;font-family:'Manrope';font-size:13px;color:var(--gold);font-weight:700;margin-top:1px}
+.guide .gbody{font-size:14px;color:var(--ink);margin-top:9px;line-height:1.55}
+.guide .gbody .en{display:block;color:var(--muted);font-size:13px;margin-top:7px}
+@media (max-width:560px){.ledit .row{grid-template-columns:1fr}.guide{flex-direction:column}}
 
 /* ---------- Tab 3: Tracker ---------- */
 .editbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
@@ -267,6 +298,62 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .code{display:flex;align-items:center;gap:9px}
 .code .c{flex:0 0 auto;font-weight:800;color:var(--gold-soft);font-size:13px;min-width:42px}
 .code input{flex:1;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:8px;padding:6px 9px;font-size:12.5px}
+
+/* reactivation goal banner */
+.react-goal{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;margin-bottom:18px;padding:16px 20px;border-radius:14px;border:1px solid var(--line-solid);background:linear-gradient(120deg,#16273e,#101d2e)}
+.react-goal .rg-title{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-right:6px}
+.react-goal .rg-title small{display:block;color:var(--muted-2);font-weight:600;letter-spacing:.02em;text-transform:none;font-size:11px;margin-top:2px}
+.react-goal .rg-item{display:flex;align-items:baseline;gap:8px;font-size:14px;color:var(--ink)}
+.react-goal .rg-item b{color:var(--gold-soft);font-weight:800;font-variant-numeric:tabular-nums}
+.react-goal .rg-item .en{color:var(--muted-2);font-size:12px}
+
+/* dashboard */
+.dash{margin-bottom:22px;border:1px solid var(--line-solid);border-radius:var(--radius);background:linear-gradient(160deg,#15263c,#0f1b2c);overflow:hidden}
+.dash .dhead{display:flex;align-items:center;gap:9px;padding:15px 18px 0}
+.dash .dhead h3{font-size:17px;color:var(--cream)}
+.dash .dhead .en{font-size:12.5px;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-solid);margin:14px 0 0}
+.tile{background:#0f1d2e;padding:14px 14px}
+.tile .num{font-family:'Playfair Display',serif;font-size:30px;line-height:1;color:var(--gold-soft);font-variant-numeric:tabular-nums}
+.tile .lbl{font-size:11px;font-weight:700;letter-spacing:.03em;color:var(--muted);margin-top:6px;text-transform:uppercase}
+.tile.completed .num{color:var(--good)}
+.dash .dprog{padding:16px 18px;border-top:1px solid var(--line-solid)}
+.dash .dprog .ptop{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted);margin-bottom:8px}
+.dash .dprog .ptop b{color:var(--ink);font-weight:700}
+.dash .dprog .track{height:9px;border-radius:999px;background:#0b1521;overflow:hidden;border:1px solid var(--line)}
+.dash .dprog .track > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold-soft));transition:width .5s}
+.attn{display:grid;gap:12px;padding:0 18px 18px}
+.attn .alist .atitle{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.attn .alist.warn .atitle{color:var(--warn)}
+.attn .alist.ready .atitle{color:var(--sky)}
+.attn .alist .atitle svg{width:15px;height:15px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--line-solid);background:#0e1a2a;color:var(--ink)}
+.chip:hover{border-color:var(--gold-dim)}
+.chip .cnt{font-size:11px;font-weight:800;color:var(--muted-2);font-variant-numeric:tabular-nums}
+.chip.warn{border-color:#5a4420;background:#241b0e}
+.chip.warn .cnt{color:var(--warn)}
+.chip.ready{border-color:#26506a;background:#0d2030}
+.chip.ready .cnt{color:var(--sky)}
+.attn .none{font-size:13px;color:var(--muted-2)}
+
+/* group accent + completed (covenant) */
+.group.g-covenant{margin-top:26px}
+.group.g-covenant > .ghead .gtag{color:var(--good)}
+.member.done-cov{border-color:#27543c;background:linear-gradient(160deg,#13271d,#0f1d17)}
+.member.done-cov .mname .nm{color:#dff3e7}
+.cov-badge{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.03em;color:#0f1f17;background:var(--good);border-radius:999px;padding:5px 10px}
+.cov-badge svg{width:13px;height:13px}
+.member .lastact{font-size:11px;color:var(--muted-2);font-weight:600;margin-top:2px}
+.member .lastact b{color:var(--sky)}
+.group-empty{padding:16px 16px;border:1.5px dashed var(--line-solid);border-radius:13px;color:var(--muted-2);font-size:13.5px;background:#0d1828}
+
+/* manual move control */
+.movebox{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.movebox select{background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:9px;padding:9px 11px;font-family:inherit;font-size:13.5px;font-weight:600}
+.movebox select:disabled{opacity:.6}
+.movehint{font-size:12px;color:var(--muted-2)}
+@media (max-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
 
 /* ---------- Tab 4: 21 Day ---------- */
 .promise-intro{padding:24px 24px;border-radius:var(--radius);border:1px solid var(--line-solid);background:radial-gradient(600px 300px at 90% -40%,rgba(228,202,134,.13),transparent 60%),linear-gradient(160deg,#1a2f4b,#0f1c2d);box-shadow:var(--shadow)}
@@ -516,8 +603,15 @@ const CFM = {
 };
 
 const LESSON_NOTE = {
-  to:"Lesoni Sapate 2 mo e 4 mei ʻEpeleli ki ʻAokosi 2026; liliu foʻou kamata ʻi Sepitema 2026 (Sapate kotoa). Ngaahi lea kuo toʻo mei he Konifelenisi Lahi ʻo ʻEpeleli 2026.",
-  en:"2nd & 4th Sunday lessons, April–August 2026; new change starts September 2026 (every Sunday). Talks selected from the April 2026 General Conference."
+  to:"Lesoni Sapate 2 mo e 4 mei ʻEpeleli ki ʻAokosi 2026. Kamata ʻi Sepitema 2026, ʻe fakahoko ʻa e Kōlomu Kaumatuʻá ʻi he Sapate kotoa pē. Ngaahi lea kuo toʻo mei he Konifelenisi Lahi ʻo ʻEpeleli 2026.",
+  en:"2nd & 4th Sunday lessons, April–August 2026. Starting September 2026, Elders Quorum meets every week. Talks selected from the April 2026 General Conference."
+};
+const LESSON_GUIDE = {
+  ref:"8.2.1.2",
+  title_to:"Ko Hono Ako ʻo e Ongoongoleleí ʻi he Ngaahi Fakataha Fakakōlomú",
+  title_en:"Gospel Learning in Quorum Meetings",
+  body_to:"ʻOku totonu ke nofotaha e tokangá ʻi he ngaahi tefito ʻi ha lea ʻe taha pe ua mei he konifelenisi lahi fakamuimuitahá. ʻE fili ʻi he faʻa lotu ʻe he kau palesitenisī ʻo e kōlomu ʻo e kaumātuʻá ʻa e ngaahi pōpoaki konifelenisi ke aleaʻi ʻe he kau mēmipa ʻo e kōlomú. Te nau fai ʻa e ngaahi fili ko ʻení ʻo makatuʻunga ʻi he ngaahi fiemaʻu ʻa e kāingalotú.",
+  body_en:"The focus should be on topics in one or more talks from the most recent general conference. The elders quorum presidency prayerfully selects conference messages for quorum members to discuss. They make these selections based on members' needs."
 };
 const LESSONS = [
   {date_to:"Sapate ʻEpeleli 12, 2026",date_en:"Sun · Apr 12, 2026",q3:false,who:"President Dallin H. Oaks",role_to:"Palesiteni ʻo e Siasí",role_en:"President of the Church",topic_to:"Moʻui ʻia Kalaisi",topic_en:"Alive in Christ",sum_to:"Tau muimui ʻia Kalaisi ʻaki hono taʻofi ʻa e fakakikihí pea fakaʻaongaʻi ʻa e lea mo e ngaahi founga ʻa e kau faʻa fakaleleí.",sum_en:"Let us follow Christ by forgoing contention and by using the language and methods of peacemakers."},
@@ -589,6 +683,24 @@ const MONTHS=[['jan','Sānuali','Jan'],['feb','Fēpueli','Feb'],['mar','Maʻasi'
   ['may','Mē','May'],['jun','Sune','Jun'],['jul','Siulai','Jul'],['aug','ʻAokosi','Aug'],
   ['sep','Sepitema','Sep'],['oct','ʻOkatopa','Oct'],['nov','Nōvema','Nov'],['dec','Tīsema','Dec']];
 const CODES=[['NM',''],['WM',''],['PM',''],['HNM',''],['WNM',''],['UB',''],['TCP','']];
+
+/* progression pipeline: miss → (complete i) → strg ; strg/pe → (complete i) → covenant */
+const GROUP_META={
+  miss:{tag_to:'Ngāue Fakafaifekau',tag_en:'Missionary Work',inds:IND_MISSIONARY},
+  strg:{tag_to:'Fakamālohia ʻo e Kau Mēmipa Foʻou mo Foki Mai',tag_en:'Strengthening New & Returning Members',inds:IND_STRENGTHEN},
+  pe:{tag_to:'Teuteu Kaumatuʻa',tag_en:'Prospective Elders',inds:IND_STRENGTHEN},
+  covenant:{tag_to:'Kakato ʻa e Hala ʻo e Fuakavá',tag_en:'Covenant Path Completed',inds:IND_STRENGTHEN,completed:true}
+};
+const GROUP_ORDER=['miss','strg','pe','covenant'];
+const ALL_MEMBERS=[];
+GROUPS.forEach(g=>g.members.forEach(m=>ALL_MEMBERS.push(Object.assign({defaultGroup:g.id},m))));
+const REACT_GOAL={
+  title_to:'Tukupaa Ngāue ki hono Fakamālohia 2026',title_en:'2026 Reactivation Goal',
+  items:[
+    {to:'Teuteu Kaumatuʻa',en:'Prospective Elders',t_to:'1 / Taʻu',t_en:'1 / year'},
+    {to:'Fāmili / Taautaha',en:'Family / Individual',t_to:'5 / Taʻu',t_en:'5 / year'}
+  ]
+};
 
 /* ---- 21-Day Promise (from his Tongan sheet; English = faithful translation) ---- */
 const SCRIPTURES=[
@@ -695,81 +807,243 @@ function renderTheme(){
   bindImgSlots();
 }
 
+function lessonsArr(){return state.lessons || LESSONS;}
+function lessonNoteVal(){return state.lessonNote || LESSON_NOTE;}
+function ensureLessons(){if(!state.lessons)state.lessons=LESSONS.map(l=>Object.assign({},l));}
+
 function renderLessons(){
-  const cards=LESSONS.map((l,i)=>`
-    <div class="lesson">
-      <div class="photo">${imgslot('lesson'+i,'fill','','')}</div>
+  const list=lessonsArr();
+  const note=lessonNoteVal();
+  const cards=list.map((l,i)=>{
+    const teacher=(l.teacher||'').trim();
+    const photo=`<div class="photo">${imgslot('lesson'+i,'fill','','')}</div>`;
+    if(editMode){
+      return `<div class="lesson">${photo}
+        <div class="body"><div class="ledit">
+          <div class="row">
+            <div class="one"><label>${t('ʻAho (Lea Faka-Tonga)','Date (Tongan)')}</label><input data-li="${i}" data-field="date_to" value="${esc(l.date_to||'')}"></div>
+            <div class="one"><label>${t('ʻAho (English)','Date (English)')}</label><input data-li="${i}" data-field="date_en" value="${esc(l.date_en||'')}"></div>
+          </div>
+          <div class="one"><label>${t('Tokotaha Naʻá ne Lea (Konifelenisi)','Conference Speaker')}</label><input data-li="${i}" data-field="who" value="${esc(l.who||'')}"></div>
+          <div class="row">
+            <div class="one"><label>${t('Lakanga (Faka-Tonga)','Role (Tongan)')}</label><input data-li="${i}" data-field="role_to" value="${esc(l.role_to||'')}"></div>
+            <div class="one"><label>${t('Lakanga (English)','Role (English)')}</label><input data-li="${i}" data-field="role_en" value="${esc(l.role_en||'')}"></div>
+          </div>
+          <div class="row">
+            <div class="one"><label>${t('Kaveinga (Faka-Tonga)','Topic (Tongan)')}</label><input data-li="${i}" data-field="topic_to" value="${esc(l.topic_to||'')}"></div>
+            <div class="one"><label>${t('Kaveinga (English)','Topic (English)')}</label><input data-li="${i}" data-field="topic_en" value="${esc(l.topic_en||'')}"></div>
+          </div>
+          <div class="one"><label>${t('Potu Folofola (fakaʻatā)','Scripture reference (optional)')}</label><input data-li="${i}" data-field="ref" value="${esc(l.ref||'')}" placeholder="${t('e.g. T&F 121:29','e.g. D&C 121:29')}"></div>
+          <div class="row">
+            <div class="one"><label>${t('Fakamatala (Faka-Tonga)','Summary (Tongan)')}</label><textarea data-li="${i}" data-field="sum_to">${esc(l.sum_to||'')}</textarea></div>
+            <div class="one"><label>${t('Fakamatala (English)','Summary (English)')}</label><textarea data-li="${i}" data-field="sum_en">${esc(l.sum_en||'')}</textarea></div>
+          </div>
+          <div class="one teach"><label>${t('Akoʻi ʻe / Faiako','Taught by / Teacher')}</label><input data-li="${i}" data-field="teacher" value="${esc(teacher)}" placeholder="${t('Hingoa ʻo e tokotaha akó','Name of the teacher')}"></div>
+          <button class="del" data-del-li="${i}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>${t('Tāmateʻi ʻa e lesoní','Delete lesson')}</button>
+        </div></div></div>`;
+    }
+    return `<div class="lesson">${photo}
       <div class="body">
-        <span class="date${l.q3?' q3':''}">${esc(t(l.date_to,l.date_en))}</span>
+        <span class="date">${esc(t(l.date_to,l.date_en))}</span>
         <h3>${esc(t(l.topic_to,l.topic_en))}</h3>
         <div class="topic-en">${esc(t(l.topic_en,l.topic_to))}</div>
         ${l.ref?`<div class="topic-en" style="color:var(--muted-2);font-weight:600">${esc(l.ref)}</div>`:''}
         <p class="summary">“${esc(t(l.sum_to,l.sum_en))}”<span class="en">${esc(t(l.sum_en,l.sum_to))}</span></p>
         <div class="who"><b>${esc(l.who)}</b> · ${esc(t(l.role_to,l.role_en))}</div>
+        <div class="teacher-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M5 10v5c0 1.5 3.1 3 7 3s7-1.5 7-3v-5"/></svg>
+          <span class="tl">${t('Akoʻi ʻe','Taught by')}</span>
+          <span class="tv${teacher?'':' empty'}">${teacher?esc(teacher):'—'}</span>
+        </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+
+  const noteBlock = editMode
+    ? `<div class="notebar"><span class="badge">${t('Fakatokanga','Note')}</span><div style="flex:1">
+        <textarea data-note="to" placeholder="Lea Faka-Tonga">${esc(note.to)}</textarea>
+        <textarea data-note="en" placeholder="English">${esc(note.en)}</textarea></div></div>`
+    : `<div class="notebar"><span class="badge">${t('Fakatokanga','Note')}</span><span>${bi(note.to,note.en)}</span></div>`;
+
   $('#panel-lessons').innerHTML=`
-    <div class="section-head"><div class="eyebrow">${t('Lesoni Kōlomu Kaumatuʻa &amp; Finéʻofa','Elders Quorum &amp; Relief Society Lessons')}</div><h2>${t('Lesoni ʻEpeleli–Sepitema 2026','Lessons · April–September 2026')}</h2></div>
-    <div class="notebar"><span class="badge">${t('Fakatokanga','Note')}</span><span>${bi(LESSON_NOTE.to,LESSON_NOTE.en)}</span></div>
-    <div class="lessons">${cards}</div>`;
+    <div class="section-head"><div class="eyebrow">${t('Lesoni Kōlomu Kaumatuʻa &amp; Finéʻofa','Elders Quorum &amp; Relief Society Lessons')}</div><h2>${t('Lesoni Sapate','Sunday Lessons')}</h2>
+      <p>${t('ʻE lava ʻe he takimuʻá ʻo fakatonutonu ʻa e ngaahi lesoní ʻi he liliu ʻo e ngaahi lea konifelenisí ʻi he mahina ʻe 6 kotoa.','Leaders can update the lessons each time the conference talks change (about every 6 months).')}</p></div>
+    <div class="editbar">
+      <button class="btn ${editMode?'':'primary'}" onclick="toggleEdit()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+        <span>${editMode?t('Tāpuni ʻa e fakatonutonú','Lock editing'):t('Faʻu / Fakatonutonu','Unlock editing')}</span></button>
+      ${editMode?`<button class="btn primary" onclick="addLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${t('Tānaki ha lesoni','Add lesson')}</button>`:''}
+      <span class="editstate"><span class="dot ${editMode?'on':''}"></span>${editMode?t('ʻOku ava ki he fakatonutonú','Editing on'):t('Lau pē','Read only')}</span>
+    </div>
+    ${noteBlock}
+    <div class="guide">
+      <span class="gref">${esc(LESSON_GUIDE.ref)}</span>
+      <div><div class="gtitle">${esc(t(LESSON_GUIDE.title_to,LESSON_GUIDE.title_en))}<span class="en">${esc(t(LESSON_GUIDE.title_en,LESSON_GUIDE.title_to))}</span></div>
+        <div class="gbody">${esc(t(LESSON_GUIDE.body_to,LESSON_GUIDE.body_en))}<span class="en">${esc(t(LESSON_GUIDE.body_en,LESSON_GUIDE.body_to))}</span></div></div>
+    </div>
+    <div class="lessons">${cards}</div>
+    ${editMode?`<button class="add-lesson" onclick="addLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${t('Tānaki ha lesoni foʻou','Add a lesson')}</button>`:''}`;
   bindImgSlots();
+  bindLessons();
+}
+function bindLessons(){
+  $$('#panel-lessons [data-field]').forEach(inp=>inp.addEventListener('input',e=>{
+    ensureLessons();const i=+e.target.dataset.li;state.lessons[i][e.target.dataset.field]=e.target.value;saveLessonsDebounced();
+  }));
+  $$('#panel-lessons [data-note]').forEach(inp=>inp.addEventListener('input',e=>{
+    state.lessonNote=state.lessonNote||Object.assign({},LESSON_NOTE);state.lessonNote[e.target.dataset.note]=e.target.value;saveLessonsDebounced();
+  }));
+  $$('#panel-lessons [data-del-li]').forEach(b=>b.addEventListener('click',e=>{
+    const i=+e.currentTarget.dataset.delLi;
+    if(!confirm(t('Tāmateʻi ʻa e lesoni ko ʻení?','Delete this lesson?')))return;
+    ensureLessons();state.lessons.splice(i,1);saveLessons();renderLessons();
+  }));
+}
+function addLesson(){
+  ensureLessons();
+  state.lessons.push({date_to:'',date_en:'',who:'',role_to:'',role_en:'',topic_to:'',topic_en:'',ref:'',sum_to:'',sum_en:'',teacher:''});
+  const idx=state.lessons.length-1;
+  saveLessons();renderLessons();
+  const el=$(`#panel-lessons input[data-li="${idx}"][data-field="date_to"]`);
+  if(el){el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>el.focus(),350);}
+  toast(t('Kuo tānaki ha lesoni foʻou','New lesson added'));
+}
+let _svl;
+function saveLessonsDebounced(){clearTimeout(_svl);_svl=setTimeout(saveLessons,500);}
+function saveLessons(){if(state.lessons)Store.set('lessons',state.lessons);if(state.lessonNote)Store.set('lessonNote',state.lessonNote);}
+
+
+let openMembers=new Set();
+function memData(id){return state.tracker[id]||{};}
+function mState(id){return state.tracker[id]=state.tracker[id]||{};}
+function effGroup(m){return memData(m.id).group||m.defaultGroup;}
+function indsDone(id){const d=memData(id);return d.ind?Object.values(d.ind).filter(Boolean).length:0;}
+function memStatus(m){const d=memData(m.id);return d.status!==undefined?d.status:m.status;}
+function lastActivity(m){let f=null;MONTHS.forEach(mo=>{const d=memData(m.id);const v=(d[mo[0]]!==undefined)?d[mo[0]]:(m[mo[0]]||'');if(v&&String(v).trim())f=mo;});return f;}
+
+function renderMember(m){
+  const gid=effGroup(m), meta=GROUP_META[gid], inds=meta.inds;
+  const done=indsDone(m.id), pct=Math.round(done/9*100), status=memStatus(m), la=lastActivity(m);
+  const open=openMembers.has(m.id)?' open':'', completed=!!meta.completed;
+  const indHtml=inds.map(ind=>{
+    const on=memData(m.id).ind&&memData(m.id).ind[ind.k];
+    return `<label class="ind${on?' done':''}"><input type="checkbox" data-mid="${m.id}" data-ind="${ind.k}" ${on?'checked':''} ${editMode?'':'disabled'}><span class="key">${ind.k}</span><span class="txt">${esc(t(ind.to,ind.en))}<span class="en">${esc(t(ind.en,ind.to))}</span></span></label>`;
+  }).join('');
+  const mons=MONTHS.map(mo=>{const d=memData(m.id);const val=(d[mo[0]]!==undefined)?d[mo[0]]:(m[mo[0]]||'');return `<div class="mon"><span>${t(mo[1],mo[2])}</span><textarea data-mid="${m.id}" data-mon="${mo[0]}" ${editMode?'':'disabled'} placeholder="—">${esc(val)}</textarea></div>`;}).join('');
+  const moveOpts=GROUP_ORDER.map(gg=>`<option value="${gg}" ${gg===gid?'selected':''}>${esc(t(GROUP_META[gg].tag_to,GROUP_META[gg].tag_en))}</option>`).join('');
+  return `<div class="member${open}${completed?' done-cov':''}" data-mid="${m.id}">
+    <div class="mhead" onclick="toggleMember('${m.id}')">
+      <div class="mname"><div class="nm">${esc(m.name)}</div>
+        ${status?`<div class="status">${esc(status)}</div>`:''}
+        ${la?`<div class="lastact">${t('Ngāue fakamuimui','Last note')}: <b>${esc(t(la[1],la[2]))}</b></div>`:''}
+      </div>
+      ${completed
+        ? `<span class="cov-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>${t('Kakato','Done')}</span>`
+        : `<div class="prog"><div class="bar"><i style="width:${pct}%"></i></div><span class="ring">${done}/9</span></div>`}
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="mbody">
+      <div class="field"><label>${t('Tuʻunga / Fakaʻilonga','Status / Key indicator')}</label>
+        <input class="statusinput" data-mid="${m.id}" data-status="1" value="${esc(status)}" ${editMode?'':'disabled'} placeholder="${t('e.g. PM; HNM','e.g. PM; HNM')}"></div>
+      <div class="field"><label>${t('Ngaahi Fakaʻilonga Tefito (a–i)','Key Indicators (a–i)')}</label><div class="indicators">${indHtml}</div></div>
+      <div class="field"><label>${t('Fakamatala Mahina','Monthly Progress')}</label><div class="months">${mons}</div></div>
+      ${editMode?`<div class="field"><label>${t('Hiki ki ha vahe kehe','Move to group')}</label><div class="movebox"><select data-move="${m.id}">${moveOpts}</select><span class="movehint">${t('ʻOku hiki fakahangatonu ʻoka lava ʻa e fakaʻilonga i.','Auto-moves when indicator i is completed.')}</span></div></div>`:''}
+    </div>
+  </div>`;
 }
 
 function renderTracker(){
-  const groups=GROUPS.map(g=>{
-    const members=g.members.map(m=>{
-      const done=(state.tracker[m.id]&&state.tracker[m.id].ind||[]).filter(Boolean).length;
-      const pct=Math.round(done/9*100);
-      const inds=g.inds.map(ind=>{
-        const on=state.tracker[m.id]&&state.tracker[m.id].ind&&state.tracker[m.id].ind[ind.k];
-        return `<label class="ind${on?' done':''}">
-          <input type="checkbox" data-mid="${m.id}" data-ind="${ind.k}" ${on?'checked':''} ${editMode?'':'disabled'}>
-          <span class="key">${ind.k}</span>
-          <span class="txt">${esc(t(ind.to,ind.en))}<span class="en">${esc(t(ind.en,ind.to))}</span></span></label>`;
-      }).join('');
-      const mons=MONTHS.map(mo=>{
-        const val=(state.tracker[m.id]&&state.tracker[m.id][mo[0]]!==undefined)?state.tracker[m.id][mo[0]]:(m[mo[0]]||'');
-        return `<div class="mon"><span>${t(mo[1],mo[2])}</span><textarea data-mid="${m.id}" data-mon="${mo[0]}" ${editMode?'':'disabled'} placeholder="—">${esc(val)}</textarea></div>`;
-      }).join('');
-      const status=(state.tracker[m.id]&&state.tracker[m.id].status!==undefined)?state.tracker[m.id].status:m.status;
-      return `<div class="member" data-mid="${m.id}">
-        <div class="mhead" onclick="this.parentNode.classList.toggle('open')">
-          <div class="mname"><div class="nm">${esc(m.name)}</div>${status?`<div class="status">${esc(status)}</div>`:''}</div>
-          <div class="prog"><div class="bar"><i style="width:${pct}%"></i></div><span class="ring">${done}/9</span></div>
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-        <div class="mbody">
-          <div class="field"><label>${t('Tuʻunga / Fakaʻilonga','Status / Key indicator')}</label>
-            <input class="statusinput" data-mid="${m.id}" data-status="1" value="${esc(status)}" ${editMode?'':'disabled'} placeholder="${t('e.g. PM; HNM','e.g. PM; HNM')}"></div>
-          <div class="field"><label>${t('Ngaahi Fakaʻilonga Tefito (a–i)','Key Indicators (a–i)')}</label><div class="indicators">${inds}</div></div>
-          <div class="field"><label>${t('Fakamatala Mahina','Monthly Progress')}</label><div class="months">${mons}</div></div>
-        </div>
-      </div>`;
-    }).join('');
-    return `<div class="group">
-      <div class="ghead"><span class="gtag">${t('Focus 5','Focus 5')}</span><h3>${esc(t(g.tag_to,g.tag_en))} <span class="en">${esc(t(g.tag_en,g.tag_to))}</span></h3></div>
-      ${members}</div>`;
+  const buckets={miss:[],strg:[],pe:[],covenant:[]};
+  ALL_MEMBERS.forEach(m=>{const g=effGroup(m);(buckets[g]||buckets[m.defaultGroup]).push(m);});
+  const active=ALL_MEMBERS.filter(m=>effGroup(m)!=='covenant');
+  const totalDone=active.reduce((s,m)=>s+indsDone(m.id),0), totalPoss=active.length*9;
+  const overallPct=totalPoss?Math.round(totalDone/totalPoss*100):0;
+  const needs=active.filter(m=>indsDone(m.id)<3 && !lastActivity(m));
+  const ready=active.filter(m=>{const d=memData(m.id);return !(d.ind&&d.ind.i)&&indsDone(m.id)>=6;});
+
+  const SHORT={miss:['Fakafaifekau','Missionary'],strg:['Fakamālohia','Strengthening'],pe:['Teuteu Kaumatuʻa','Prospective'],covenant:['Hala Fuakava','Covenant Path']};
+  const tiles=GROUP_ORDER.map(gid=>`<div class="tile${GROUP_META[gid].completed?' completed':''}"><div class="num">${buckets[gid].length}</div><div class="lbl">${esc(t(SHORT[gid][0],SHORT[gid][1]))}</div></div>`).join('');
+  const chip=(m,cls)=>`<button class="chip ${cls}" onclick="focusMember('${m.id}')">${esc(m.name)}<span class="cnt">${indsDone(m.id)}/9</span></button>`;
+  const needsChips=needs.length?needs.map(m=>chip(m,'warn')).join(''):`<span class="none">${t('ʻOku ʻi ai ha fakalakalaka ʻa e mēmipa kotoa.','Every member has active progress.')}</span>`;
+  const readyChips=ready.length?ready.map(m=>chip(m,'ready')).join(''):`<span class="none">${t('ʻOku teʻeki ofi ha taha ki he hiki.','No one is close to advancing yet.')}</span>`;
+
+  const dash=`<div class="dash">
+    <div class="dhead"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg>
+      <div><h3>${t('Ngaahi Fakaʻilonga Tefito','Key Indicators')}</h3></div></div>
+    <div class="tiles">${tiles}</div>
+    <div class="dprog"><div class="ptop"><span>${t('Fakalakalaka fakakātoa (kau mēmipa lolotonga)','Overall progress (active members)')}</span><b>${totalDone}/${totalPoss} · ${overallPct}%</b></div><div class="track"><i style="width:${overallPct}%"></i></div></div>
+    <div class="attn">
+      <div class="alist warn"><div class="atitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>${t('Fie maʻu Tokanga','Needs attention')}</div><div class="chips">${needsChips}</div></div>
+      <div class="alist ready"><div class="atitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>${t('Teu ke Hiki','Ready to advance')}</div><div class="chips">${readyChips}</div></div>
+    </div>
+  </div>`;
+
+  const goalBanner=`<div class="react-goal">
+    <div class="rg-title">${esc(REACT_GOAL.title_to)}<small>${esc(REACT_GOAL.title_en)}</small></div>
+    ${REACT_GOAL.items.map(it=>`<div class="rg-item">${esc(t(it.to,it.en))} <b>${esc(t(it.t_to,it.t_en))}</b> <span class="en">${esc(t(it.en,it.to))}</span></div>`).join('')}
+  </div>`;
+
+  const sections=GROUP_ORDER.map(gid=>{
+    const meta=GROUP_META[gid], mem=buckets[gid];
+    const inner=mem.length?mem.map(renderMember).join('')
+      :`<div class="group-empty">${gid==='covenant'
+          ?t('Teʻeki ke ʻi ai ha taha — ʻe hā mai ʻa e kakai ʻi heni ʻoka kakato ʻenau hala ʻo e fuakavá (fakaʻilonga i).','No one yet — members appear here when they complete the covenant path (indicator i).')
+          :t('Kuo ʻosi hiki kotoa ʻa e kau mēmipá.','All members here have moved on.')}</div>`;
+    const tag=meta.completed?t('Kakato','Completed'):t('Focus 5','Focus 5');
+    return `<div class="group g-${gid}">
+      <div class="ghead"><span class="gtag">${tag}</span><h3>${esc(t(meta.tag_to,meta.tag_en))} <span class="en">${esc(t(meta.tag_en,meta.tag_to))}</span></h3></div>
+      ${inner}</div>`;
   }).join('');
+
   const codes=CODES.map(c=>{
     const v=(state.codes&&state.codes[c[0]]!==undefined)?state.codes[c[0]]:c[1];
     return `<div class="code"><span class="c">${c[0]}</span><input data-code="${c[0]}" value="${esc(v)}" ${editMode?'':'disabled'} placeholder="${t('fakaʻuhinga…','define…')}"></div>`;
   }).join('');
+
   $('#panel-tracker').innerHTML=`
     <div class="section-head"><div class="eyebrow">${t('Ngāue Fakalakalaka Tokangaʻekina ʻe 5','Focus 5 Progress')}</div><h2>${t('Tracker ʻa e Kōlomú','Quorum Tracker')}</h2>
-      <p>${t('Lomiʻi ha hingoa ke fakaava ʻa e ngaahi fakaʻilongá mo e fakamatala mahiná.','Tap a name to open its indicators and monthly progress.')}</p></div>
+      <p>${t('Lomiʻi ha hingoa ke fakaava. ʻOka kakato ʻa e fakaʻilonga i, ʻe hiki fakahangatonu ʻa e mēmipá ki he vahe hokó.','Tap a name to open it. Completing indicator i moves the member to the next stage automatically.')}</p></div>
     <div class="editbar">
-      <button class="btn ${editMode?'':'primary'}" id="editbtn" onclick="toggleEdit()">
+      <button class="btn ${editMode?'':'primary'}" onclick="toggleEdit()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-        <span id="editlbl">${editMode?t('Tāpuni ʻa e fakatonutonú','Lock editing'):t('Faʻu / Fakatonutonu','Unlock editing')}</span></button>
+        <span>${editMode?t('Tāpuni ʻa e fakatonutonú','Lock editing'):t('Faʻu / Fakatonutonu','Unlock editing')}</span></button>
       <span class="editstate"><span class="dot ${editMode?'on':''}"></span>${editMode?t('ʻOku ava ki he fakatonutonú','Editing on'):t('Lau pē','Read only')}</span>
     </div>
-    ${groups}
+    ${goalBanner}
+    ${dash}
+    ${sections}
     <div class="legend">
       <h4>${t('Kī ʻo e Ngaahi Fakaʻilongá','Status Code Key')}</h4>
       <p>${t('Faʻu pē ʻe he takimuʻá ʻa e ʻuhinga ʻo e ngaahi fakaʻilonga ko ʻení (NM, PM, HNM…).','Define what each code means here (NM, PM, HNM…).')}</p>
       <div class="codes">${codes}</div>
     </div>`;
   bindTracker();
+}
+
+function toggleMember(id){
+  const el=document.querySelector('.member[data-mid="'+id+'"]');
+  if(openMembers.has(id)){openMembers.delete(id);el&&el.classList.remove('open');}
+  else{openMembers.add(id);el&&el.classList.add('open');}
+}
+function focusMember(id){
+  openMembers.add(id);renderTracker();
+  const el=document.querySelector('.member[data-mid="'+id+'"]');
+  if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function setIndicator(id,k,val){
+  const m=ALL_MEMBERS.find(x=>x.id===id),d=mState(id);d.ind=d.ind||{};d.ind[k]=val;
+  if(k==='i'&&val){
+    const cur=d.group||m.defaultGroup;
+    if(cur==='miss'){d.group='strg';d.ind={};openMembers.delete(id);toast(t(m.name+' → Fakamālohia',m.name+' → Strengthening'));}
+    else if(cur==='strg'||cur==='pe'){d.group='covenant';toast(t('Mālō! Kuo kakato e hala ʻo e fuakavá 🎉','Covenant path completed 🎉'));}
+  }
+  saveTracker();renderTracker();
+}
+function moveMember(id,to){
+  const m=ALL_MEMBERS.find(x=>x.id===id),d=mState(id),from=d.group||m.defaultGroup;
+  if(from===to)return;
+  if((from==='miss')!==(to==='miss'))d.ind={};
+  d.group=to;saveTracker();renderTracker();
 }
 
 function renderPromise(){
@@ -843,25 +1117,26 @@ function renderPromise(){
 /* =====================================================================
    STATE + BINDINGS
    ===================================================================== */
-let state={tracker:{},codes:{},p21:{}};
+let state={tracker:{},codes:{},p21:{},lessons:null,lessonNote:null};
 let editMode=false;
 
 function bindTracker(){
   $$('#panel-tracker .ind input').forEach(c=>c.addEventListener('change',e=>{
     if(!editMode){e.target.checked=!e.target.checked;return;}
-    const id=e.target.dataset.mid,k=e.target.dataset.ind;
-    state.tracker[id]=state.tracker[id]||{};state.tracker[id].ind=state.tracker[id].ind||{};
-    state.tracker[id].ind[k]=e.target.checked;saveTracker();renderTracker();
+    setIndicator(e.target.dataset.mid,e.target.dataset.ind,e.target.checked);
   }));
   $$('#panel-tracker textarea[data-mon]').forEach(ta=>ta.addEventListener('input',e=>{
     const id=e.target.dataset.mid,mo=e.target.dataset.mon;
-    state.tracker[id]=state.tracker[id]||{};state.tracker[id][mo]=e.target.value;saveTrackerDebounced();
+    mState(id)[mo]=e.target.value;saveTrackerDebounced();
   }));
   $$('#panel-tracker .statusinput').forEach(inp=>inp.addEventListener('input',e=>{
-    const id=e.target.dataset.mid;state.tracker[id]=state.tracker[id]||{};state.tracker[id].status=e.target.value;saveTrackerDebounced();
+    mState(e.target.dataset.mid).status=e.target.value;saveTrackerDebounced();
   }));
   $$('#panel-tracker .code input').forEach(inp=>inp.addEventListener('input',e=>{
     state.codes[e.target.dataset.code]=e.target.value;saveTrackerDebounced();
+  }));
+  $$('#panel-tracker select[data-move]').forEach(s=>s.addEventListener('change',e=>{
+    moveMember(e.target.dataset.move,e.target.value);
   }));
 }
 let _sv;
@@ -875,7 +1150,7 @@ function toggleEdit(){
     if(code!==LEADER_PASSCODE){toast(t('Fika hala','Wrong passcode'));return;}
     editMode=true;toast(t('Ava ki he fakatonutonú','Editing unlocked'));
   }else{editMode=false;toast(t('Kuo tāpuni','Editing locked'));}
-  renderTracker();
+  renderTracker();renderLessons();
 }
 
 function bindPromise(){
@@ -955,6 +1230,8 @@ $$('.tab').forEach(tab=>tab.addEventListener('click',()=>{
   state.codes=await Store.get('codes')||{};
   state.p21=await Store.get('p21')||{};
   state.img=await Store.get('img')||{};
+  state.lessons=await Store.get('lessons')||null;
+  state.lessonNote=await Store.get('lessonNote')||null;
   $('#storage-note').textContent = (Store.mode==='cloud')
     ? (LANG==='to'?'Fakahokohoko ʻi he ʻao (Firebase).':'Synced to the cloud (Firebase).')
     : (LANG==='to'?'ʻOku tauhi ʻa e tracker ʻi he tēvaisí ni. Fakaava ʻa e Firebase ke vahevahe ki he kau takimuʻá.':'Tracker saves on this device. Enable Firebase to share across the presidency.');
