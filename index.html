@@ -112,6 +112,10 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
     radial-gradient(700px 360px at 85% -30%, rgba(228,202,134,.16), transparent 60%),
     linear-gradient(160deg,#1c3252,#0e1a2b 75%);
   box-shadow:var(--shadow)}
+.hero.has-side{display:flex;gap:26px;align-items:center}
+.hero.has-side .hero-side{flex:0 0 36%;max-width:290px;min-width:0}
+.hero.has-side .hero-body{flex:1;min-width:0}
+@media(max-width:640px){.hero.has-side{flex-direction:column;align-items:stretch}.hero.has-side .hero-side{flex:none;max-width:none}}
 .hero .area{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .hero h2{font-size:clamp(23px,6vw,40px);color:#fff;margin:10px 0 0;max-width:18ch;line-height:1.12}
 .hero .theme-en{color:var(--gold-soft);font-size:clamp(15px,3.6vw,20px);font-family:'Playfair Display',serif;font-style:italic;margin-top:10px;max-width:30ch}
@@ -131,9 +135,11 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .goal ul{list-style:none;margin:12px 0 0;padding:0}
 .goal li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
 .goal li:first-child{border-top:0}
-.goal li .lbl{flex:1}
+.goal li .lbl{flex:1;min-width:0}
 .goal li .lbl .en{display:block;color:var(--muted-2);font-size:12.5px}
-.goal li .tgt{flex:0 0 auto;font-weight:800;color:var(--gold-soft);font-variant-numeric:tabular-nums}
+.goal li .tgt{flex:0 0 auto;white-space:nowrap;font-weight:800;color:var(--gold-soft);font-variant-numeric:tabular-nums}
+.goal li .tgtinput{flex:0 0 auto;width:8.5em;max-width:46%;text-align:right;font-weight:800;color:var(--gold-soft);background:#0c1726;border:1px solid var(--line-solid);border-radius:8px;padding:5px 9px;font-family:'Manrope';font-size:14px;font-variant-numeric:tabular-nums}
+.goal li .tgtinput:focus{outline:none;border-color:var(--gold-dim)}
 
 .quotes{margin-top:24px;display:grid;gap:14px}
 .quote{padding:22px 24px;border-radius:14px;border:1px solid var(--line-solid);background:linear-gradient(160deg,#15273e,#0f1c2d)}
@@ -146,8 +152,10 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .imgslot:hover{border-color:var(--gold-dim);background:#0e1c2c}
 .imgslot .ico{width:30px;height:30px;opacity:.55}
 .imgslot .cap{font-size:13px;font-weight:700;letter-spacing:.02em;line-height:1.3;max-width:30ch}
-.imgslot .rm{position:absolute;top:8px;right:8px;z-index:2;background:rgba(8,14,22,.82);border:1px solid var(--line-solid);color:var(--cream);border-radius:9px;font-size:12px;font-weight:700;padding:5px 11px;display:none}
-.imgslot.has .rm{display:block}
+.imgslot .rm{position:absolute;top:8px;right:8px;z-index:3;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(8,14,22,.78);border:1px solid var(--gold-dim);color:var(--gold);border-radius:50%;cursor:pointer;padding:0;transition:background .15s,transform .15s}
+.imgslot .rm:hover{background:rgba(8,14,22,.96);transform:scale(1.08)}
+.imgslot .rm svg{width:15px;height:15px}
+.imgslot.ro{border:0;cursor:default}
 .imgslot input[type=file]{display:none}
 /* profile — circular headshot */
 .imgslot.profile{width:128px;height:128px;min-width:128px;border-radius:50%;padding:10px;flex:0 0 auto}
@@ -165,6 +173,10 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 /* fill — fills a parent container (lesson photo) */
 .imgslot.fill{margin:0;border:0;border-radius:0;height:100%;min-height:120px}
 .imgslot.fill img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* heroside — portrait image beside the hero heading */
+.imgslot.heroside{width:100%;min-height:180px;background:#0a131f;border-radius:14px}
+.imgslot.heroside.has{padding:0;aspect-ratio:4/5}
+.imgslot.heroside img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px}
 
 /* prophet / theme quote row with profile */
 .prophet{display:flex;gap:20px;align-items:center;margin-top:20px;padding:22px 24px;border-radius:var(--radius);border:1px solid var(--line-solid);background:linear-gradient(120deg,#16283f,#101e30)}
@@ -393,6 +405,8 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .chk.read input{accent-color:var(--good)}
 
 .commitments{display:grid;gap:8px}
+.commit-intro{font-size:15px;color:var(--ink);margin:0 0 12px;max-width:64ch;line-height:1.5}
+.commit-intro .en{display:block;color:var(--muted);font-size:13.5px;margin-top:6px}
 .commit{display:flex;align-items:flex-start;gap:11px;padding:13px 15px;border-radius:11px;border:1px solid var(--line-solid);background:#11243a}
 .commit input{flex:0 0 auto;width:21px;height:21px;margin-top:1px;accent-color:var(--gold)}
 .commit .txt{font-size:15.5px;color:var(--ink)}
@@ -498,7 +512,7 @@ const firebaseConfig = {
   appId: "1:115910206384:web:c754433b02eb662da8ac75"
 };
 const LEADER_PASSCODE = "wj8"; // change this — unlocks Tracker & Lessons editing
-const SYNC_KEYS = new Set(['tracker','codes','lessons','lessonNote']); // shared; 'p21' & 'img' stay local
+const SYNC_KEYS = new Set(['tracker','codes','lessons','lessonNote','goalT']); // shared; 'p21' & 'img' stay local
 
 /* ---------------- helpers ---------------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -753,6 +767,10 @@ const COMMITMENTS=[
   {to:'Lau e Tohi ʻa Molomoná he ʻaho kotoa pē.',en:'Read the Book of Mormon every day.'},
   {to:'Feinga ke talangofua makehe.',en:'Strive for greater obedience.'}
 ];
+const COMMIT_INTRO={
+  to:'Te ke lava ʻo fai mo e ngaahi meʻa ko ʻeni ke fakahā ki he ʻEiki ko Sīsū Kalaisi ʻokú ke maʻu ha tui mālohi kiate ia ʻi hoʻo hoko ko ʻEne tamaioʻeiki/kaungangā:',
+  en:'You can do these things to show the Lord Jesus Christ that you have strong faith in Him as you serve as His servant and fellow labourer:'
+};
 
 /* =====================================================================
    RENDER
@@ -764,10 +782,17 @@ function bi(to,en){
 function t(to,en){return LANG==='to'?to:en;}
 
 function renderTheme(){
-  const g=GOALS.map(cat=>`
+  const g=GOALS.map((cat,ci)=>`
     <div class="goal card">
       <h3>${esc(t(cat.to,cat.en))} <span class="en">${esc(t(cat.en,cat.to))}</span></h3>
-      <ul>${cat.items.map(it=>`<li><span class="lbl">${esc(t(it.to,it.en))}<span class="en">${esc(t(it.en,it.to))}</span></span><span class="tgt">${esc(it.t)}</span></li>`).join('')}</ul>
+      <ul>${cat.items.map((it,ii)=>{
+        const key=ci+'-'+ii;
+        const val=(state.goalT&&state.goalT[key]!==undefined)?state.goalT[key]:it.t;
+        const tgt=editMode
+          ? `<input class="tgtinput" data-goalt="${key}" value="${esc(val)}" placeholder="${esc(it.t)}">`
+          : `<span class="tgt">${esc(val)}</span>`;
+        return `<li><span class="lbl">${esc(t(it.to,it.en))}<span class="en">${esc(t(it.en,it.to))}</span></span>${tgt}</li>`;
+      }).join('')}</ul>
     </div>`).join('');
   const pillars=PILLARS.map(p=>{
     if(p.kind==='profile'){
@@ -791,13 +816,21 @@ function renderTheme(){
       </div></div>`;
   }).join('');
 
+  // Hero image-left: only render the left column when there's an image OR we're editing
+  const heroImg=imgslot('hero_img','heroside','Fakahūʻi ha fakatātā','Add a photo');
+  const showSide = editMode || !!(state.img&&state.img['hero_img']);
+
   $('#panel-theme').innerHTML=`
-    <div class="hero">
-      <div class="area">${esc(t(THEME.area.to,THEME.area.en))}</div>
-      <h2>${esc(t(THEME.theme_to,THEME.theme_en))}</h2>
-      <div class="theme-en">${esc(t(THEME.theme_en,THEME.theme_to))}</div>
-      <span class="ref">${esc(THEME.ref)}</span>
-      <div class="scripture">“${esc(t(THEME.scripture_to,THEME.scripture_en))}”<em>${esc(t(THEME.scripture_en,THEME.scripture_to))}</em></div>
+    ${editbar()}
+    <div class="hero ${showSide?'has-side':''}">
+      ${showSide?`<div class="hero-side">${heroImg}</div>`:''}
+      <div class="hero-body">
+        <div class="area">${esc(t(THEME.area.to,THEME.area.en))}</div>
+        <h2>${esc(t(THEME.theme_to,THEME.theme_en))}</h2>
+        <div class="theme-en">${esc(t(THEME.theme_en,THEME.theme_to))}</div>
+        <span class="ref">${esc(THEME.ref)}</span>
+        <div class="scripture">“${esc(t(THEME.scripture_to,THEME.scripture_en))}”<em>${esc(t(THEME.scripture_en,THEME.scripture_to))}</em></div>
+      </div>
     </div>
 
     <div class="prophet">
@@ -826,6 +859,23 @@ function renderTheme(){
       <div class="ct"><b>${esc(t('Haʻu ʻo Muimui ʻIate Au · 2026','Come, Follow Me · 2026'))}</b><span>${esc(t(CFM.to,CFM.en))}</span></div>
     </div>`;
   bindImgSlots();
+  bindTheme();
+}
+
+/* shared edit bar (used by Theme & Tracker) */
+function editbar(){
+  return `<div class="editbar">
+    <button class="btn ${editMode?'':'primary'}" onclick="toggleEdit()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+      <span>${editMode?t('Tāpuni ʻa e fakatonutonú','Lock editing'):t('Faʻu / Fakatonutonu','Unlock editing')}</span></button>
+    <span class="editstate"><span class="dot ${editMode?'on':''}"></span>${editMode?t('ʻOku ava ki he fakatonutonú','Editing on'):t('Lau pē','Read only')}</span>
+  </div>`;
+}
+function bindTheme(){
+  $$('#panel-theme input[data-goalt]').forEach(inp=>inp.addEventListener('input',e=>{
+    state.goalT=state.goalT||{};state.goalT[e.target.dataset.goalt]=e.target.value;
+    Store.set('goalT',state.goalT);
+  }));
 }
 
 function lessonsArr(){return state.lessons || LESSONS;}
@@ -1011,7 +1061,9 @@ function renderTracker(){
           ?t('Teʻeki ke ʻi ai ha taha — ʻe hā mai ʻa e kakai ʻi heni ʻoka kakato ʻenau hala ʻo e fuakavá (fakaʻilonga i).','No one yet — members appear here when they complete the covenant path (indicator i).')
           :t('Kuo ʻosi hiki kotoa ʻa e kau mēmipá.','All members here have moved on.')}</div>`;
     const tag=meta.completed?t('Kakato','Completed'):t('Focus 5','Focus 5');
+    const banner=gid!=='covenant'?imgslot('grp_'+gid,'wide','Fakahūʻi ha fakatātā ki he vahe ní','Add a photo for this group'):'';
     return `<div class="group g-${gid}">
+      ${banner}
       <div class="ghead"><span class="gtag">${tag}</span><h3>${esc(t(meta.tag_to,meta.tag_en))} <span class="en">${esc(t(meta.tag_en,meta.tag_to))}</span></h3></div>
       ${inner}</div>`;
   }).join('');
@@ -1024,12 +1076,8 @@ function renderTracker(){
   $('#panel-tracker').innerHTML=`
     <div class="section-head"><div class="eyebrow">${t('Ngāue Fakalakalaka Tokangaʻekina ʻe 5','Focus 5 Progress')}</div><h2>${t('Tracker ʻa e Kōlomú','Quorum Tracker')}</h2>
       <p>${t('Lomiʻi ha hingoa ke fakaava. ʻOka kakato ʻa e fakaʻilonga i, ʻe hiki fakahangatonu ʻa e mēmipá ki he vahe hokó.','Tap a name to open it. Completing indicator i moves the member to the next stage automatically.')}</p></div>
-    <div class="editbar">
-      <button class="btn ${editMode?'':'primary'}" onclick="toggleEdit()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-        <span>${editMode?t('Tāpuni ʻa e fakatonutonú','Lock editing'):t('Faʻu / Fakatonutonu','Unlock editing')}</span></button>
-      <span class="editstate"><span class="dot ${editMode?'on':''}"></span>${editMode?t('ʻOku ava ki he fakatonutonú','Editing on'):t('Lau pē','Read only')}</span>
-    </div>
+    ${editbar()}
+    ${imgslot('tracker_banner','wide','Fakahūʻi ha fakatātā ʻi ʻolunga','Add a banner photo')}
     ${goalBanner}
     ${dash}
     ${sections}
@@ -1039,6 +1087,7 @@ function renderTracker(){
       <div class="codes">${codes}</div>
     </div>`;
   bindTracker();
+  bindImgSlots();
 }
 
 function toggleMember(id){
@@ -1068,8 +1117,8 @@ function moveMember(id,to){
 }
 
 function renderPromise(){
-  const intro_to="Naʻe fai mai ʻe Elder M. Russell Ballard mo Elder Robert E. Wells ha palōmesi makehe ki he kāingalotú kotoa. Ke tau hiki ha lisi ʻo hotau ngaahi kaumeʻa teʻeki Siasi pe ʻoku ʻikai mālohi ʻi he Siasí, ʻo tau lotuaʻi kinautolu ʻi heʻetau lotu pongipongi mo e efiafi. Kapau ʻe fai ʻeni ʻi he ʻaho hokohoko ʻe 21 taʻehala, ʻoku talaʻofa ʻe he ʻEikí ʻe ʻi ai ha taha ʻe tali ha fakaafe ki he ngaahi lēsoni ʻa e kau faifekaú ʻi he ʻosi ʻo e ʻaho ʻe 21.";
-  const intro_en="Elder M. Russell Ballard and Elder Robert E. Wells issued a special promise to all members. Make a list of your not-yet-member or less-active friends and pray for them by name in your morning and evening prayers. If you do this for 21 consecutive days without missing one, the Lord promises that at least one person will accept an invitation to hear the missionary lessons by the end of the 21 days.";
+  const intro_to="Naʻe fai mai ʻe Elder M. Russell Ballard ʻo e Kōlomu ʻo e Toko Hongofulu Mā Uá mo Elder Robert E. Wells ʻo e Kōlomu ʻUluaki ʻo e Kau Fitungofulú, ha palōmesi makehe ki he kāingalotu kotoa pē ʻo e Siasí ʻi he Misiona ʻIuta Soleki Sití. Naʻá na fai mai ʻa e fakahinohino ko ʻení, ke tau hiki ha lisi ʻo hotau ngaahi kaungāmeʻa teʻeki Siasi pe ʻoku ʻikai ke nau mālohi ʻi he Siasí pea tau lotuaʻi kinautolu ʻi heʻetau ngaahi lotu pongipongi mo e efiafi. Kapau te tau fai ʻeni ʻi ha ʻaho hokohoko ʻe 21, ʻo ʻikai hala ha ʻaho, ʻoku talaʻofa mai ʻe he ʻEikí, ʻe ʻi ai ha taha ʻi he ngaahi hingoa ʻi heʻetau lisi, pe ko ha taha kehe pē, te ne tali ha fakaafe ke fanongo ki he ngaahi lēsoni ʻa e kau faifekaú ʻi he ʻosi ʻa e ʻaho ʻe 21. ʻOku mau fakaafeʻi kimoutolu ke mou ʻahiʻahiʻi ʻa e talaʻofa ko ʻeni ʻa e Tamai Hēvaní, he kuó Ne folofola mai:";
+  const intro_en="Elder M. Russell Ballard of the Quorum of the Twelve and Elder Robert E. Wells of the First Quorum of the Seventy gave a special promise to all members of the Church in the Salt Lake City Utah Mission. They gave this instruction: make a list of our not-yet-member or less-active friends and pray for them by name in our morning and evening prayers. If we do this for 21 consecutive days without missing a single day, the Lord promises that at least one person — a name on our list, or someone else — will accept an invitation to hear the missionary lessons by the end of the 21 days. We invite you to test this promise of our Heavenly Father, for He has declared:";
   const vref_to='“Ko au, ko e ʻEikí, ʻoku ou haʻisia ʻoka mou ka fai ʻa e meʻa kuó u lea ʻakí.” — Tokāteline mo e Ngaahi Fuakava 82:10';
   const vref_en='“I, the Lord, am bound when ye do what I say.” — Doctrine & Covenants 82:10';
 
@@ -1119,6 +1168,7 @@ function renderPromise(){
     <div class="daygrid">${days}</div>
 
     <div class="blockhead"><h3>${t('Ngaahi Tukupaa','Commitments')}</h3></div>
+    <p class="commit-intro">${esc(t(COMMIT_INTRO.to,COMMIT_INTRO.en))}<span class="en">${esc(t(COMMIT_INTRO.en,COMMIT_INTRO.to))}</span></p>
     <div class="commitments">${commits}</div>
 
     <div class="blockhead"><h3>${t('Hoʻo Ongo Faifekau Taimi Kakató','Your Full-Time Missionaries')}</h3></div>
@@ -1171,7 +1221,7 @@ function toggleEdit(){
     if(code!==LEADER_PASSCODE){toast(t('Fika hala','Wrong passcode'));return;}
     editMode=true;toast(t('Ava ki he fakatonutonú','Editing unlocked'));
   }else{editMode=false;toast(t('Kuo tāpuni','Editing locked'));}
-  renderTracker();renderLessons();
+  renderTheme();renderTracker();renderLessons();
 }
 
 function bindPromise(){
@@ -1207,10 +1257,18 @@ function share21(){
 /* ---- image slots (saved as data URLs; work fully offline) ---- */
 function imgslot(id,kind,capTo,capEn){
   const saved=state.img&&state.img[id];
+  kind=kind||'wide';
+  if(!editMode){
+    // read mode: filled = image only (no control); empty = nothing at all
+    if(!saved) return '';
+    return `<div class="imgslot ${kind} has ro" data-img="${id}"><img src="${saved}" alt=""></div>`;
+  }
+  // edit mode: clickable; filled shows the × remove icon, empty shows the add box
   const cap = (capTo||capEn) ? esc(t(capTo,capEn)) : t('Fakahūʻi fakatātā','Add photo');
-  return `<label class="imgslot ${kind||'wide'}${saved?' has':''}" data-img="${id}">
-    ${saved?`<img src="${saved}" alt="">`:`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="cap">${cap}</span>`}
-    <span class="rm" onclick="removeImg(event,'${id}')">${t('Toʻo','Remove')}</span>
+  return `<label class="imgslot ${kind}${saved?' has':''}" data-img="${id}">
+    ${saved
+      ? `<img src="${saved}" alt=""><button type="button" class="rm" onclick="removeImg(event,'${id}')" aria-label="${t('Toʻo','Remove')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`
+      : `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="cap">${cap}</span>`}
     <input type="file" accept="image/*"></label>`;
 }
 function downscaleImage(file, maxDim, cb){
@@ -1235,12 +1293,19 @@ function bindImgSlots(){
     const isProfile=e.target.closest('.imgslot').classList.contains('profile');
     downscaleImage(f, isProfile?480:1280, dataUrl=>{
       state.img=state.img||{};state.img[id]=dataUrl;Store.set('img',state.img);
-      const tab=$('.tab[aria-selected="true"]').dataset.tab;tab==='theme'?renderTheme():renderLessons();
+      rerenderActiveTab();
     });
   }));
 }
 function removeImg(ev,id){ev.preventDefault();ev.stopPropagation();if(state.img)delete state.img[id];Store.set('img',state.img||{});
-  const tab=$('.tab[aria-selected="true"]').dataset.tab;tab==='theme'?renderTheme():renderLessons();}
+  rerenderActiveTab();}
+function rerenderActiveTab(){
+  const sel=$('.tab[aria-selected="true"]');const tab=sel?sel.dataset.tab:'theme';
+  if(tab==='theme')renderTheme();
+  else if(tab==='tracker')renderTracker();
+  else if(tab==='lessons')renderLessons();
+  else renderPromise();
+}
 
 /* =====================================================================
    LANGUAGE + TABS + BOOT
