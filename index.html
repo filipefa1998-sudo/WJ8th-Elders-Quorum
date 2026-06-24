@@ -81,6 +81,9 @@ header{
 
 /* ---------- Tabs ---------- */
 nav.tabs{position:sticky;top:0;z-index:30;background:rgba(11,20,32,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-solid)}
+body.focus-promise nav.tabs{display:none}
+body.focus-promise .yr{display:none}
+body.focus-promise footer{display:none}
 .tabs-inner{max-width:1080px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:0 8px}
 .tabs-inner::-webkit-scrollbar{display:none}
 .tab{flex:0 0 auto;background:transparent;border:0;color:var(--muted);padding:15px 14px 13px;font-weight:700;font-size:13.5px;letter-spacing:.01em;border-bottom:2.5px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:7px}
@@ -440,7 +443,7 @@ footer b{color:var(--muted)}
     <svg class="glyph" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="13" fill="#0c1726" stroke="#2A3C57"/><path d="M32 13 L46 25 L46 51 L18 51 L18 25 Z" fill="none" stroke="#C8A24A" stroke-width="2.4"/><path d="M32 13 L32 6 M28 9 h8" stroke="#C8A24A" stroke-width="2.4"/><path d="M26 51 L26 38 h12 v13" fill="none" stroke="#9C7E36" stroke-width="2"/></svg>
     <div class="titles">
       <div class="eyebrow" data-to="Uooti West Jordan 8 · Kōlomu Kaumatuʻa" data-en="West Jordan 8th Ward · Elders Quorum">Uooti West Jordan 8 · Kōlomu Kaumatuʻa</div>
-      <h1>Taumuʻa &amp; Tukupaa <span style="color:var(--gold)">2026</span></h1>
+      <h1><span id="apptitle">Taumuʻa &amp; Tukupaa</span> <span class="yr" style="color:var(--gold)">2026</span></h1>
       <div class="sub" data-to="Taylorsville Utah Temple" data-en="Taylorsville Utah Temple">Taylorsville Utah Temple</div>
     </div>
     <div class="langtoggle" role="group" aria-label="Language">
@@ -497,6 +500,15 @@ const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 let LANG = localStorage.getItem('wj8_lang') || 'to';
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
+
+/* Focused share mode: opening a "#promise" link shows ONLY the fillable 21-Day Promise form */
+const IS_FOCUS = location.hash.toLowerCase().indexOf('promise')>=0;
+function syncFocusHeader(){const el=$('#apptitle');if(el&&document.body.classList.contains('focus-promise'))el.textContent=(LANG==='to'?'Palōmesi ʻAho ʻe 21':'21-Day Promise');}
+if(IS_FOCUS){
+  document.body.classList.add('focus-promise');
+  $$('.tab').forEach(tb=>tb.setAttribute('aria-selected',tb.dataset.tab==='promise'));
+  $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-promise'));
+}
 
 /* ---------------- storage layer (Firebase OR localStorage) ---------------- */
 const Store=(()=>{
@@ -1177,9 +1189,10 @@ function saveP21Debounced(){clearTimeout(_svp);_svp=setTimeout(saveP21,500);}
 function saveP21(){Store.set('p21',state.p21);}
 function reset21(){if(confirm(t('Kamata foʻou ʻa e palōmesí? ʻE mole ʻa e fakaʻiló.','Start the promise over? Your progress will be cleared.'))){state.p21={};saveP21();renderPromise();}}
 function share21(){
-  const url=location.href.split('#')[0];
-  if(navigator.share){navigator.share({title:'WJ8 · 21-Day Promise',url}).catch(()=>{});}
-  else{navigator.clipboard.writeText(url).then(()=>toast(t('Kuo kopi ʻa e linkí','Link copied'))).catch(()=>toast(url));}
+  const url=location.href.split('#')[0].split('?')[0]+'#promise';
+  const title=t('WJ8 · Palōmesi ʻAho ʻe 21','WJ8 · 21-Day Promise');
+  if(navigator.share){navigator.share({title,text:t('Ko e palōmesi ʻaho ʻe 21 — ʻahiʻahiʻi ia.','Try the 21-Day Promise.'),url}).catch(()=>{});}
+  else{navigator.clipboard.writeText(url).then(()=>toast(t('Kuo kopi ʻa e link ʻo e palōmesí','Promise form link copied'))).catch(()=>toast(url));}
 }
 
 /* ---- image slots (saved as data URLs; work fully offline) ---- */
@@ -1208,11 +1221,13 @@ function removeImg(ev,id){ev.preventDefault();ev.stopPropagation();if(state.img)
 function setLang(l){
   LANG=l;localStorage.setItem('wj8_lang',l);
   document.documentElement.lang=l==='to'?'to':'en';
-  document.body.className='lang-'+l;
+  document.body.classList.remove('lang-to','lang-en');
+  document.body.classList.add('lang-'+l);
   $('#lang-to').setAttribute('aria-pressed',l==='to');
   $('#lang-en').setAttribute('aria-pressed',l==='en');
   $$('[data-to]').forEach(el=>{el.textContent=l==='to'?el.dataset.to:el.dataset.en;});
   renderAll();
+  syncFocusHeader();
 }
 function renderAll(){renderTheme();renderLessons();renderTracker();renderPromise();}
 
