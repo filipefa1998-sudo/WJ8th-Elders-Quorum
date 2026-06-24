@@ -158,6 +158,10 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .imgslot .rm:hover{background:rgba(8,14,22,.96);transform:scale(1.08)}
 .imgslot .rm svg{width:15px;height:15px}
 .imgslot.ro{border:0;cursor:default}
+.imgslot.uploading{pointer-events:none}
+.imgslot.uploading::after{content:'';position:absolute;inset:0;z-index:4;background:rgba(8,14,22,.55);border-radius:inherit}
+.imgslot.uploading::before{content:'';position:absolute;z-index:5;top:50%;left:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border:3px solid rgba(200,162,74,.3);border-top-color:var(--gold);border-radius:50%;animation:imgspin .7s linear infinite}
+@keyframes imgspin{to{transform:rotate(360deg)}}
 .imgslot input[type=file]{display:none}
 /* profile — circular headshot */
 .imgslot.profile{width:128px;height:128px;min-width:128px;border-radius:50%;padding:10px;flex:0 0 auto}
@@ -551,7 +555,7 @@ const firebaseConfig = {
   appId: "1:115910206384:web:c754433b02eb662da8ac75"
 };
 const LEADER_PASSCODE = "wj8"; // change this — unlocks Tracker & Lessons editing
-const SYNC_KEYS = new Set(['tracker','codes','lessons','lessonNote','goalT']); // shared; 'p21' & 'img' stay local
+const SYNC_KEYS = new Set(['tracker','codes','lessons','lessonNote','goalT','imgIndex']); // shared; per-image data uses 'img-<id>' keys (also synced)
 
 /* ---------------- helpers ---------------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -590,17 +594,22 @@ const Store=(()=>{
   }
   function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
   function saveLocal(key,val){try{localStorage.setItem('wj8_'+key,JSON.stringify(val));}catch(e){console.warn('Local save failed (storage full?)',e);}}
+  function isSync(key){return SYNC_KEYS.has(key) || key.indexOf('img-')===0;}
   async function get(key){
-    if(fs && SYNC_KEYS.has(key)){
+    if(fs && isSync(key)){
       try{const doc=await fs.collection('wj8').doc(key).get();if(doc.exists)return doc.data().v;}catch(e){console.warn('Cloud read failed',e);}
     }
     const v=localStorage.getItem('wj8_'+key);return v?JSON.parse(v):null;
   }
   function set(key,val){
     saveLocal(key,val);
-    if(fs && SYNC_KEYS.has(key)){fs.collection('wj8').doc(key).set({v:val}).catch(e=>console.warn('Cloud write failed',e));}
+    if(fs && isSync(key)){fs.collection('wj8').doc(key).set({v:val}).catch(e=>console.warn('Cloud write failed',e));}
   }
-  return {init,get,set,get mode(){return fs?'cloud':'local';}};
+  function del(key){
+    try{localStorage.removeItem('wj8_'+key);}catch(_){}
+    if(fs && isSync(key)){fs.collection('wj8').doc(key).delete().catch(e=>console.warn('Cloud delete failed',e));}
+  }
+  return {init,get,set,del,get mode(){return fs?'cloud':'local';}};
 })();
 
 /* =====================================================================
@@ -1379,17 +1388,90 @@ function downscaleImage(file, maxDim, cb){
   };
   r.readAsDataURL(file);
 }
+/* prepImage: downscale + compress so the result fits comfortably in one Firestore
+   record (<~900KB) so it can sync to everyone. Steps down quality, then size, until it fits. */
+const IMG_BUDGET=900000; // chars of the data URL (~ bytes); Firestore doc limit is ~1,048,576
+function prepImage(file, maxDim, cb){
+  const r=new FileReader();
+  r.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      const draw=(dim,q)=>{
+        let{width:w,height:h}=img;
+        if(w>dim||h>dim){const s=Math.min(dim/w,dim/h);w=Math.round(w*s);h=Math.round(h*s);}
+        const c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0,w,h);
+        try{return c.toDataURL('image/jpeg',q);}catch(_){return null;}
+      };
+      let dim=maxDim, out=null;
+      for(let pass=0; pass<5; pass++){
+        for(const q of [0.78,0.66,0.55,0.45]){
+          out=draw(dim,q);
+          if(out && out.length<=IMG_BUDGET){cb(out,false);return;}
+        }
+        dim=Math.round(dim*0.8);
+        if(dim<320)break;
+      }
+      cb(out||r.result, !out || out.length>IMG_BUDGET);
+    };
+    img.onerror=()=>cb(r.result,true);
+    img.src=r.result;
+  };
+  r.readAsDataURL(file);
+}
+function setImg(id,url){
+  const ver=Date.now();
+  Store.set('img-'+id,url);                 // local cache + cloud record
+  try{localStorage.setItem('wj8_imgver-'+id,String(ver));}catch(_){}
+  state.imgIndex=state.imgIndex||{};state.imgIndex[id]=ver;Store.set('imgIndex',state.imgIndex);
+}
+function delImg(id){
+  Store.del('img-'+id);
+  try{localStorage.removeItem('wj8_imgver-'+id);}catch(_){}
+  if(state.imgIndex){delete state.imgIndex[id];Store.set('imgIndex',state.imgIndex);}
+}
+/* Load shared photos. Only pulls a photo from the cloud when its version changed
+   since this device last cached it — so repeat opens cost almost nothing. */
+async function loadImages(){
+  state.img=state.img||{};
+  const idx=state.imgIndex||{};
+  const fetches=[];
+  for(const id of Object.keys(idx)){
+    const ver=idx[id];
+    let localVer=null,localUrl=null;
+    try{localVer=localStorage.getItem('wj8_imgver-'+id);}catch(_){}
+    try{const v=localStorage.getItem('wj8_img-'+id);localUrl=v?JSON.parse(v):null;}catch(_){}
+    if(localUrl && String(localVer)===String(ver)){
+      state.img[id]=localUrl;                // unchanged → use cache, no network
+    }else{
+      fetches.push(Store.get('img-'+id).then(u=>{
+        if(u){state.img[id]=u;
+          try{localStorage.setItem('wj8_img-'+id,JSON.stringify(u));localStorage.setItem('wj8_imgver-'+id,String(ver));}catch(_){}
+        }
+      }).catch(()=>{}));
+    }
+  }
+  if(fetches.length)await Promise.all(fetches);
+}
 function bindImgSlots(){
   $$('.imgslot input[type=file]').forEach(inp=>inp.addEventListener('change',e=>{
-    const f=e.target.files[0];if(!f)return;const id=e.target.closest('.imgslot').dataset.img;
-    const isProfile=e.target.closest('.imgslot').classList.contains('profile');
-    downscaleImage(f, isProfile?480:1280, dataUrl=>{
-      state.img=state.img||{};state.img[id]=dataUrl;Store.set('img',state.img);
+    const f=e.target.files[0];if(!f)return;
+    const slot=e.target.closest('.imgslot');const id=slot.dataset.img;
+    const isProfile=slot.classList.contains('profile');
+    slot.classList.add('uploading');
+    prepImage(f, isProfile?480:1100, (dataUrl,tooBig)=>{
+      state.img=state.img||{};state.img[id]=dataUrl;
+      if(tooBig){
+        Store.set('img',state.img); // keep on this device only
+        toast(t('ʻOku lahi fau ʻa e fakatātaá ke vahevahe — ʻe hā pē ʻi he tēvaisí ni.','That image is too large to share — it will show only on this device.'));
+      }else{
+        setImg(id,dataUrl);
+      }
       rerenderActiveTab();
     });
   }));
 }
-function removeImg(ev,id){ev.preventDefault();ev.stopPropagation();if(state.img)delete state.img[id];Store.set('img',state.img||{});
+function removeImg(ev,id){ev.preventDefault();ev.stopPropagation();if(state.img)delete state.img[id];delImg(id);
   rerenderActiveTab();}
 function rerenderActiveTab(){
   const sel=$('.tab[aria-selected="true"]');const tab=sel?sel.dataset.tab:'theme';
@@ -1428,11 +1510,14 @@ $$('.tab').forEach(tab=>tab.addEventListener('click',()=>{
   state.tracker=await Store.get('tracker')||{};
   state.codes=await Store.get('codes')||{};
   state.p21=await Store.get('p21')||{};
-  state.img=await Store.get('img')||{};
+  state.goalT=await Store.get('goalT')||{};
+  state.img=await Store.get('img')||{};            // legacy/local cache
+  state.imgIndex=await Store.get('imgIndex')||{};   // synced list of shared photos (id -> version)
   state.lessons=await Store.get('lessons')||null;
   state.lessonNote=await Store.get('lessonNote')||null;
+  await loadImages();                                // overlay shared photos (cached unless changed)
   $('#storage-note').textContent = (Store.mode==='cloud')
-    ? (LANG==='to'?'Tracker, lesoni, mo e kī ʻoku fakahokohoko ʻi he ʻao (Firebase). Ko e palōmesi ʻaho ʻe 21 mo e ngaahi fakatātaá ʻoku tauhi ʻi he tēvaisí ni.':'Tracker, lessons, and code key sync to the cloud (Firebase). The 21-Day Promise and photos are saved on this device.')
+    ? (LANG==='to'?'Tracker, lesoni, kī, mo e ngaahi fakatātaá ʻoku fakahokohoko ʻi he ʻao (Firebase). Ko e palōmesi ʻaho ʻe 21 ʻoku tauhi ʻi he tēvaisí ni.':'Tracker, lessons, code key, and photos all sync to the cloud (Firebase). The 21-Day Promise progress is saved on this device.')
     : (LANG==='to'?'ʻOku tauhi ʻa e ngaahi fakaʻiló ʻi he tēvaisí ni.':'Saving on this device. (Cloud sync will connect when online.)');
   setLang(LANG);
 })();
