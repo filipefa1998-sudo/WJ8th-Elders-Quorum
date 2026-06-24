@@ -45,7 +45,8 @@ body{
     radial-gradient(900px 500px at -10% 10%, #16273f 0%, transparent 50%),
     var(--stone-deep);
   color:var(--ink);
-  line-height:1.55;
+  font-size:16.5px;
+  line-height:1.6;
   min-height:100vh;
   padding-bottom:env(safe-area-inset-bottom);
 }
@@ -95,10 +96,10 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .section-head{margin:0 0 18px}
 .section-head .eyebrow{margin-bottom:6px}
 .section-head h2{font-size:clamp(22px,5.4vw,32px);color:var(--cream)}
-.section-head p{color:var(--muted);font-size:14px;margin:8px 0 0;max-width:60ch}
+.section-head p{color:var(--muted);font-size:15.5px;margin:8px 0 0;max-width:60ch}
 
 .card{background:linear-gradient(180deg,var(--stone),var(--stone-deep));border:1px solid var(--line-solid);border-radius:var(--radius);box-shadow:var(--shadow)}
-.bi-en{display:block;color:var(--muted);font-weight:500;font-size:.82em;margin-top:2px}
+.bi-en{display:block;color:var(--muted);font-weight:500;font-size:.88em;margin-top:2px}
 .bi-en.serif{font-family:'Manrope',sans-serif}
 .lang-en .bi-pri{} /* primary swaps handled in JS via .bi blocks */
 
@@ -112,44 +113,88 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .hero h2{font-size:clamp(23px,6vw,40px);color:#fff;margin:10px 0 0;max-width:18ch;line-height:1.12}
 .hero .theme-en{color:var(--gold-soft);font-size:clamp(15px,3.6vw,20px);font-family:'Playfair Display',serif;font-style:italic;margin-top:10px;max-width:30ch}
 .hero .ref{display:inline-block;margin-top:18px;font-weight:700;font-size:12.5px;letter-spacing:.08em;color:var(--gold);border:1px solid var(--gold-dim);padding:6px 12px;border-radius:999px}
-.scripture{margin-top:16px;color:var(--ink);font-size:15px;border-left:2px solid var(--gold-dim);padding-left:16px;max-width:62ch}
-.scripture em{display:block;color:var(--muted);font-style:normal;font-size:13.5px;margin-top:6px}
+.scripture{margin-top:16px;color:var(--ink);font-size:17.5px;border-left:2px solid var(--gold-dim);padding-left:16px;max-width:62ch}
+.scripture em{display:block;color:var(--muted);font-style:normal;font-size:15px;margin-top:6px}
 
 .vision{margin-top:18px;display:flex;gap:14px;align-items:flex-start;padding:20px 22px;border-radius:var(--radius);border:1px solid var(--line-solid);background:linear-gradient(120deg,#16344a,#102031)}
 .vision .mark{flex:0 0 auto;width:34px;height:34px;color:var(--sky)}
-.vision .v-to{font-family:'Playfair Display',serif;font-size:19px;color:#fff}
-.vision .v-en{color:var(--sky);font-size:13.5px;margin-top:3px}
+.vision .v-to{font-family:'Playfair Display',serif;font-size:22px;color:#fff}
+.vision .v-en{color:var(--sky);font-size:15px;margin-top:3px}
 
 .goal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px;margin-top:18px}
 .goal{padding:18px 18px 6px;border-radius:14px}
-.goal h3{font-size:17px;color:var(--cream);display:flex;align-items:baseline;gap:8px}
+.goal h3{font-size:19.5px;color:var(--cream);display:flex;align-items:baseline;gap:8px}
 .goal h3 .en{font-size:12px;color:var(--gold);font-family:'Manrope';font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 .goal ul{list-style:none;margin:12px 0 0;padding:0}
-.goal li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.goal li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
 .goal li:first-child{border-top:0}
 .goal li .lbl{flex:1}
-.goal li .lbl .en{display:block;color:var(--muted-2);font-size:11.5px}
+.goal li .lbl .en{display:block;color:var(--muted-2);font-size:12.5px}
 .goal li .tgt{flex:0 0 auto;font-weight:800;color:var(--gold-soft);font-variant-numeric:tabular-nums}
 
 .quotes{margin-top:24px;display:grid;gap:14px}
 .quote{padding:22px 24px;border-radius:14px;border:1px solid var(--line-solid);background:linear-gradient(160deg,#15273e,#0f1c2d)}
-.quote p{font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin:0;font-style:italic}
-.quote .en{font-style:normal;font-family:'Manrope';font-size:13.5px;color:var(--muted);margin-top:8px}
+.quote p{font-family:'Playfair Display',serif;font-size:19.5px;color:var(--ink);margin:0;font-style:italic}
+.quote .en{font-style:normal;font-family:'Manrope';font-size:15px;color:var(--muted);margin-top:8px}
 .quote .by{display:block;margin-top:12px;font-size:12px;letter-spacing:.04em;color:var(--gold);font-weight:700;font-style:normal;font-family:'Manrope'}
 
-/* image slot */
-.imgslot{margin-top:14px;border:1.5px dashed var(--line-solid);border-radius:12px;background:#0c1726;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted-2);text-align:center;padding:18px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s}
-.imgslot:hover{border-color:var(--gold-dim)}
-.imgslot.small{min-height:84px}
-.imgslot .ico{width:26px;height:26px;opacity:.6}
-.imgslot .cap{font-size:11.5px;font-weight:600;letter-spacing:.03em}
-.imgslot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.imgslot .rm{position:absolute;top:6px;right:6px;z-index:2;background:rgba(8,14,22,.8);border:1px solid var(--line-solid);color:var(--cream);border-radius:8px;font-size:11px;padding:3px 8px;display:none}
+/* image slots — purposeful sizes: profile (round), wide (banner), big (full image visible) */
+.imgslot{border:1.6px dashed var(--line-solid);border-radius:14px;background:#0c1726;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted-2);text-align:center;padding:18px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s,background .2s}
+.imgslot:hover{border-color:var(--gold-dim);background:#0e1c2c}
+.imgslot .ico{width:30px;height:30px;opacity:.55}
+.imgslot .cap{font-size:13px;font-weight:700;letter-spacing:.02em;line-height:1.3;max-width:30ch}
+.imgslot .rm{position:absolute;top:8px;right:8px;z-index:2;background:rgba(8,14,22,.82);border:1px solid var(--line-solid);color:var(--cream);border-radius:9px;font-size:12px;font-weight:700;padding:5px 11px;display:none}
 .imgslot.has .rm{display:block}
 .imgslot input[type=file]{display:none}
+/* profile — circular headshot */
+.imgslot.profile{width:128px;height:128px;min-width:128px;border-radius:50%;padding:10px;flex:0 0 auto}
+.imgslot.profile .ico{width:24px;height:24px}
+.imgslot.profile .cap{font-size:11px}
+.imgslot.profile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* wide — compact when empty, banner once a photo is added */
+.imgslot.wide{width:100%;min-height:128px}
+.imgslot.wide.has{aspect-ratio:16/7;min-height:0;padding:0}
+.imgslot.wide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* big — shows the WHOLE image, nothing cropped */
+.imgslot.big{width:100%;min-height:188px;background:#0a131f}
+.imgslot.big.has{padding:0}
+.imgslot.big img{max-width:100%;max-height:560px;width:auto;height:auto;object-fit:contain;border-radius:8px}
+/* fill — fills a parent container (lesson photo) */
+.imgslot.fill{margin:0;border:0;border-radius:0;height:100%;min-height:120px}
+.imgslot.fill img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* prophet / theme quote row with profile */
+.prophet{display:flex;gap:20px;align-items:center;margin-top:20px;padding:22px 24px;border-radius:var(--radius);border:1px solid var(--line-solid);background:linear-gradient(120deg,#16283f,#101e30)}
+.prophet .pq{flex:1;min-width:0}
+.prophet blockquote{margin:0;font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--ink);line-height:1.45}
+.prophet blockquote .en{display:block;font-family:'Manrope';font-style:normal;font-size:15px;color:var(--muted);margin-top:9px}
+.prophet .by{display:block;margin-top:14px;font-size:13px;letter-spacing:.03em;color:var(--gold);font-weight:700}
+.prophet .by small{display:block;color:var(--muted-2);font-weight:600;font-size:12px;letter-spacing:0;margin-top:2px}
+
+/* pillar devotional sections */
+.pillars{display:grid;gap:16px;margin-top:18px}
+.pillar{border:1px solid var(--line-solid);border-radius:var(--radius);overflow:hidden;background:linear-gradient(160deg,#15273e,#0f1c2d)}
+.pillar .ptext{padding:22px 24px}
+.pillar .ptag{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.pillar .phead{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin:8px 0 0;line-height:1.3}
+.pillar .phead .en{display:block;font-family:'Manrope';font-size:15px;font-weight:600;color:var(--gold-soft);font-style:normal;margin-top:7px}
+.pillar .pbody{font-size:15px;color:var(--ink);margin:12px 0 0;line-height:1.6}
+.pillar .pbody .en{display:block;color:var(--muted);font-size:13.5px;margin-top:7px}
+.pillar.with-profile .ptext{display:flex;gap:20px;align-items:center}
+.pillar.with-profile .pinner{flex:1;min-width:0}
+
+/* come-follow-me note */
+.cfm{display:flex;gap:14px;align-items:center;margin-top:24px;padding:18px 22px;border-radius:14px;border:1px solid var(--line-solid);background:#11243a}
+.cfm .ico{flex:0 0 auto;width:30px;height:30px;color:var(--gold)}
+.cfm .ct b{display:block;color:var(--cream);font-size:15.5px}
+.cfm .ct span{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+@media (max-width:600px){
+  .prophet{flex-direction:column;text-align:center}
+  .pillar.with-profile .ptext{flex-direction:column;text-align:center}
+}
 
 /* ---------- Tab 2: Lessons ---------- */
-.notebar{display:flex;gap:12px;align-items:flex-start;padding:15px 18px;border-radius:13px;border:1px solid var(--line-solid);background:#11243a;margin-bottom:8px;font-size:13px;color:var(--muted)}
+.notebar{display:flex;gap:12px;align-items:flex-start;padding:15px 18px;border-radius:13px;border:1px solid var(--line-solid);background:#11243a;margin-bottom:8px;font-size:14.5px;color:var(--muted)}
 .notebar .badge{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold);text-transform:uppercase}
 .lessons{margin-top:18px;display:grid;gap:13px}
 .lesson{display:grid;grid-template-columns:120px 1fr;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-solid);background:linear-gradient(120deg,#15263c,#101d2e)}
@@ -157,11 +202,11 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .lesson .body{padding:16px 18px}
 .lesson .date{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;color:#1a1206;background:var(--gold);padding:4px 10px;border-radius:999px}
 .lesson .date.q3{background:var(--sky);color:#06202c}
-.lesson h3{font-size:18px;margin:11px 0 0;color:var(--cream)}
-.lesson .topic-en{font-size:13px;color:var(--gold);font-weight:700;margin-top:2px}
-.lesson .summary{font-size:13.5px;color:var(--ink);margin:10px 0 0;font-family:'Playfair Display',serif;font-style:italic}
-.lesson .summary .en{display:block;font-family:'Manrope';font-style:normal;color:var(--muted);font-size:12.5px;margin-top:6px}
-.lesson .who{margin-top:11px;font-size:12px;color:var(--muted-2)}
+.lesson h3{font-size:20.5px;margin:11px 0 0;color:var(--cream)}
+.lesson .topic-en{font-size:14.5px;color:var(--gold);font-weight:700;margin-top:2px}
+.lesson .summary{font-size:15.5px;color:var(--ink);margin:10px 0 0;font-family:'Playfair Display',serif;font-style:italic}
+.lesson .summary .en{display:block;font-family:'Manrope';font-style:normal;color:var(--muted);font-size:13.5px;margin-top:6px}
+.lesson .who{margin-top:11px;font-size:13px;color:var(--muted-2)}
 .lesson .who b{color:var(--ink);font-weight:700}
 
 /* ---------- Tab 3: Tracker ---------- */
@@ -185,8 +230,8 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .member{border:1px solid var(--line-solid);border-radius:13px;background:linear-gradient(160deg,#15263c,#101c2d);margin-bottom:11px;overflow:hidden}
 .member .mhead{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
 .member .mname{flex:1;min-width:0}
-.member .mname .nm{font-weight:700;font-size:15.5px;color:var(--cream)}
-.member .mname .status{font-size:11.5px;color:var(--gold);font-weight:700;margin-top:1px}
+.member .mname .nm{font-weight:700;font-size:17px;color:var(--cream)}
+.member .mname .status{font-size:12.5px;color:var(--gold);font-weight:700;margin-top:1px}
 .member .prog{flex:0 0 auto;display:flex;align-items:center;gap:9px}
 .member .prog .ring{font-size:11.5px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
 .bar{flex:0 0 64px;height:6px;border-radius:999px;background:#0c1726;overflow:hidden;border:1px solid var(--line)}
@@ -202,22 +247,22 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .ind{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border-radius:10px;background:#0e1a2a;border:1px solid var(--line)}
 .ind input{flex:0 0 auto;width:19px;height:19px;margin:1px 0 0;accent-color:var(--gold)}
 .ind .key{flex:0 0 auto;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold);width:16px;text-align:center}
-.ind .txt{flex:1;font-size:13px;color:var(--ink)}
-.ind .txt .en{display:block;color:var(--muted-2);font-size:11.5px}
+.ind .txt{flex:1;font-size:14.5px;color:var(--ink)}
+.ind .txt .en{display:block;color:var(--muted-2);font-size:12.5px}
 .ind.done{background:#10261c;border-color:#27543c}
 .ind.done .txt{color:var(--good)}
 
 .months{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
 .mon{display:flex;flex-direction:column;gap:5px}
 .mon span{font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--muted-2);text-transform:uppercase}
-.mon textarea,.statusinput{width:100%;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:9px;padding:8px 10px;font-family:inherit;font-size:12.5px;resize:vertical}
+.mon textarea,.statusinput{width:100%;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:9px;padding:8px 10px;font-family:inherit;font-size:14px;resize:vertical}
 .mon textarea{min-height:46px}
 .mon textarea:disabled,.statusinput:disabled{opacity:.78;cursor:default}
 textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 
 .legend{margin-top:18px;padding:16px 18px;border-radius:13px;border:1px solid var(--line-solid);background:#0f1d2e}
 .legend h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.legend p{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.legend p{font-size:13.5px;color:var(--muted);margin:0 0 12px}
 .codes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
 .code{display:flex;align-items:center;gap:9px}
 .code .c{flex:0 0 auto;font-weight:800;color:var(--gold-soft);font-size:13px;min-width:42px}
@@ -226,8 +271,8 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 /* ---------- Tab 4: 21 Day ---------- */
 .promise-intro{padding:24px 24px;border-radius:var(--radius);border:1px solid var(--line-solid);background:radial-gradient(600px 300px at 90% -40%,rgba(228,202,134,.13),transparent 60%),linear-gradient(160deg,#1a2f4b,#0f1c2d);box-shadow:var(--shadow)}
 .promise-intro .formula{font-family:'Playfair Display',serif;font-size:clamp(16px,4.4vw,22px);color:var(--gold-soft);letter-spacing:.02em}
-.promise-intro p{font-size:14px;color:var(--ink);margin:14px 0 0;max-width:64ch}
-.promise-intro p .en{display:block;color:var(--muted);font-size:13px;margin-top:8px}
+.promise-intro p{font-size:15.5px;color:var(--ink);margin:14px 0 0;max-width:64ch}
+.promise-intro p .en{display:block;color:var(--muted);font-size:14px;margin-top:8px}
 .promise-intro .vref{margin-top:14px;font-style:italic;font-family:'Playfair Display',serif;color:var(--gold);font-size:14.5px}
 
 .promise-progress{display:flex;align-items:center;gap:14px;margin:18px 0;padding:16px 20px;border-radius:14px;border:1px solid var(--line-solid);background:#11243a}
@@ -237,8 +282,8 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .promise-progress .pbar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold-soft));transition:width .5s}
 
 .blockhead{display:flex;align-items:baseline;gap:9px;margin:24px 0 10px}
-.blockhead h3{font-size:18px;color:var(--cream)}
-.blockhead .en{font-size:12.5px;color:var(--muted)}
+.blockhead h3{font-size:20.5px;color:var(--cream)}
+.blockhead .en{font-size:13.5px;color:var(--muted)}
 
 .prayfor{display:grid;gap:8px}
 .prayfor input{background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:10px;padding:11px 13px;font-size:14px;font-family:inherit}
@@ -250,7 +295,7 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .dayrow.full .daynum{color:var(--good);background:#0c1f16}
 .daymain{padding:11px 13px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
 .scrip{flex:1 1 160px;min-width:0}
-.scrip a{font-weight:700;font-size:14.5px;color:var(--ink)}
+.scrip a{font-weight:700;font-size:16px;color:var(--ink)}
 .scrip .sub{font-size:11px;color:var(--muted-2)}
 .checks{display:flex;gap:14px;flex:0 0 auto}
 .chk{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:600}
@@ -260,8 +305,8 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .commitments{display:grid;gap:8px}
 .commit{display:flex;align-items:flex-start;gap:11px;padding:13px 15px;border-radius:11px;border:1px solid var(--line-solid);background:#11243a}
 .commit input{flex:0 0 auto;width:21px;height:21px;margin-top:1px;accent-color:var(--gold)}
-.commit .txt{font-size:14px;color:var(--ink)}
-.commit .txt .en{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.commit .txt{font-size:15.5px;color:var(--ink)}
+.commit .txt .en{display:block;color:var(--muted);font-size:13.5px;margin-top:3px}
 
 .contacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
 .contact{display:grid;grid-template-columns:1fr 130px;gap:8px}
@@ -401,7 +446,11 @@ const THEME = {
   theme_en:"Centered Your Home on Christ and Strengthen Your Family Through His Gospel.",
   ref:"Hilamani 5:12 · Helaman 5:12",
   scripture_to:"…manatu ʻoku makatuʻunga ʻi he maka ʻo hotau Huhuʻí, ʻa ia ko Kalaisi, ko e ʻAlo ʻo e ʻOtuá, kuo pau ke mo langa ai homo makatuʻungá…",
-  scripture_en:"…remember that it is upon the rock of our Redeemer, who is Christ, the Son of God, that ye must build your foundation…"
+  scripture_en:"…remember that it is upon the rock of our Redeemer, who is Christ, the Son of God, that ye must build your foundation…",
+  prophet_to:"Ko e fāmilí ko e tuʻutuʻuni ʻe he ʻOtuá, pea ʻoku ʻomi ʻe he ongoongolelei kuo toe fakafoki maí ʻa e sīpinga ke tau fakamālohia ia.",
+  prophet_en:"The family is ordained of God, and the restored gospel gives us the pattern to strengthen it.",
+  prophet_by:"President Dallin H. Oaks",
+  prophet_role:"October 2025 general conference"
 };
 const GOALS = [
   {to:"Ngāue Faka-Temipale",en:"Temple Work",items:[
@@ -430,14 +479,41 @@ const GOALS = [
     {to:"ʻEkitiviti Kōlomu",en:"Quorum activity",t:"Kuata"},
     {to:"Ngāue Tokoni",en:"Service",t:"Kuata"}]}
 ];
-const QUOTES = [
-  {to:"Kumi mo e fakahaofi ʻa e toko tahá, lolotonga ʻa e ngāue fakaetauhi faivelenga ki he toko hivangofulu mā hivá.",
-   en:"Searching after and rescuing the one, while ministering faithfully to the ninety-nine.", by:"Utah Area Vision"},
-  {to:"ʻOku tau tokoni ʻaki ʻetau akoʻi ha taha ʻi heni, tauhi ki ha taha ʻi ai, fakaafeʻi ʻa e taha ʻi muʻa ʻiate kitautolú. Pea kiate au, ko e meʻa fakaofó ko ha meʻa pē te tau lava ʻo faí ʻe feʻunga ia.",
-   en:"We help by teaching one here, ministering to one there, inviting the one in front of us. And to me, the marvelous thing is that whatever we can do will be adequate.", by:"Elder D. Todd Christofferson"},
-  {to:"ʻOku tau ofi ange kia Sīsū Kalaisi ʻaki ʻetau tauhi e ngaahi fuakavá mo kau ʻi he ngaahi ouau ʻo e temipalé.",
-   en:"We come closer to Jesus Christ by keeping covenants and participating in temple ordinances.", by:"Covenant Path · Hala ʻo e Fuakava"}
+const PILLARS = [
+  { // slide 5 — rescue the one
+    tag_to:"Ngāue Fakatauhi",tag_en:"Ministering",img:"pillar_rescue",kind:"wide",
+    head_to:"Kumi mo e fakahaofi ʻa e toko tahá, lolotonga ʻa e ngāue fakaetauhi faivelenga ki he toko hivangofulu mā hivá.",
+    head_en:"Searching after and rescuing the one, while ministering faithfully to the ninety-nine.",
+    body_to:"ʻOku tau muimui ki he sīpinga ʻa e Fakamoʻuí ʻaki ʻetau kumi ha niʻihi fakafoʻituitui ʻoku nau fie maʻu ha ʻofa, poupou, pe fehokotaki. ʻOku hoko tahataha ʻa e tānakí ʻi heʻetau ngāue fakaetauhí ʻo hangē ko Ia te Ne faí.",
+    body_en:"We follow the Savior's example by seeking out individuals in need of love, support, or connection. Gathering happens one by one as we minister as He would."
+  },
+  { // slide 10 — Book of Mormon / feasting
+    tag_to:"Ului",tag_en:"Conversion",img:"pillar_bom",kind:"wide",
+    head_to:"Ko e ʻinasi ʻi he ngaahi lea ʻa e kau palōfita moʻuí mo e folofolá, tautautefito ki he Tohi ʻa Molomoná — ko e meʻangāue ia ʻa e ʻEikí ki hono tānakí.",
+    head_en:"Feasting upon the words of living prophets and the scriptures, especially the Book of Mormon — the Lord's instrument of gathering.",
+    body_to:"ʻOku tau fakaloloto ʻa e uluí ʻaki ʻetau ako e ngaahi akonaki ʻa e kau palōfita moʻuí mo fakaului kitautolu ʻi he folofolá. ʻOku ʻomi ʻe he Tohi ʻa Molomoná ha mālohi, mahino, mo ha fakamoʻoni kia Sīsū Kalaisi.",
+    body_en:"We deepen conversion by studying the teachings of living prophets and immersing ourselves in the scriptures. The Book of Mormon brings power, clarity, and testimony of Jesus Christ."
+  },
+  { // slide 12 — covenant path
+    tag_to:"Hala ʻo e Fuakava",tag_en:"Covenant Path",img:"pillar_covenant",kind:"wide",
+    head_to:"Ko e ʻaʻeva ʻi he hala ʻo e fuakavá ʻoku fakataumuʻa ke maʻu — pea tokoniʻi ʻa e niʻihi kehé ke nau maʻu — ʻa e ngaahi tāpuaki taʻengatá mo ha meʻafua lahi ange ʻo e mālohi ʻo e ʻOtuá ʻi he Fale ʻo e ʻEikí.",
+    head_en:"Walking the covenant path intent on receiving — and helping others receive — eternal blessings and a greater measure of God's power in the House of the Lord.",
+    body_to:"ʻOku tau ofi ange kia Sīsū Kalaisi ʻaki ʻetau tauhi e ngaahi fuakavá mo kau ʻi he ngaahi ouau ʻo e temipalé. ʻI heʻetau fakamālohia hotau vā fetuʻutaki fakafuakava pē ʻatautolu mo Iá, ʻoku tau tokoni ai ki he niʻihi kehé ke nau fakalakalaka ʻi honau hala ki he ngaahi tāpuaki taʻengatá.",
+    body_en:"We come closer to Jesus Christ by keeping covenants and participating in temple ordinances. As we strengthen our own covenant relationship with Him, we help others progress on their path toward eternal blessings."
+  },
+  { // slide 14 — Christofferson (attributed; profile portrait)
+    tag_to:"Ngāue Fakafaifekau",tag_en:"Missionary Work",img:"pillar_christofferson",kind:"profile",
+    by:"Elder D. Todd Christofferson",role_to:"Kōlomu ʻo e Toko 12 ʻAposetoló",role_en:"Quorum of the Twelve Apostles",
+    head_to:"ʻOku ʻikai fie maʻu ke tau hohaʻa ki he aʻusia fakakātoa ʻo e ngāue ʻo e huhuʻí; ko e fatongia ia ʻo e Fakamoʻuí, ʻi heʻene hoko ko e ʻEiki ʻo e ngoue vainé.",
+    head_en:"We don't need to worry about the overall reach of the work of redemption; that's the Savior's role, as the Lord of the vineyard.",
+    body_to:"ʻOku tau tokoni ʻaki ʻetau akoʻi ha taha ʻi heni, tauhi ki ha taha ʻi ai, fakaafeʻi ʻa e taha ʻi muʻa ʻiate kitautolú. Pea kiate au, ko e meʻa fakaofó ko ha meʻa pē te tau lava ʻo faí ʻe feʻunga ia.",
+    body_en:"We help by teaching one here, ministering to one there, inviting the one in front of us. And to me, the marvelous thing is that whatever we can do will be adequate."
+  }
 ];
+const CFM = {
+  to:"Polokalama Lau Folofola — Haʻu ʻo Muimui ʻIate Au 2026: Konga Tukufakaholo Motuʻá mo e Tohi ʻa Molomoná.",
+  en:"Come, Follow Me 2026 reading schedule — the Old Testament and the Book of Mormon."
+};
 
 const LESSON_NOTE = {
   to:"Lesoni Sapate 2 mo e 4 mei ʻEpeleli ki ʻAokosi 2026; liliu foʻou kamata ʻi Sepitema 2026 (Sapate kotoa). Ngaahi lea kuo toʻo mei he Konifelenisi Lahi ʻo ʻEpeleli 2026.",
@@ -560,7 +636,28 @@ function renderTheme(){
       <h3>${esc(t(cat.to,cat.en))} <span class="en">${esc(t(cat.en,cat.to))}</span></h3>
       <ul>${cat.items.map(it=>`<li><span class="lbl">${esc(t(it.to,it.en))}<span class="en">${esc(t(it.en,it.to))}</span></span><span class="tgt">${esc(it.t)}</span></li>`).join('')}</ul>
     </div>`).join('');
-  const q=QUOTES.map(qq=>`<div class="quote"><p>“${esc(t(qq.to,qq.en))}”<span class="en">${esc(t(qq.en,qq.to))}</span></p><span class="by">${esc(qq.by)}</span></div>`).join('');
+  const pillars=PILLARS.map(p=>{
+    if(p.kind==='profile'){
+      return `<div class="pillar with-profile">
+        <div class="ptext">
+          ${imgslot(p.img,'profile','Fakatātā','Photo')}
+          <div class="pinner">
+            <div class="ptag">${esc(t(p.tag_to,p.tag_en))}</div>
+            <div class="phead">“${esc(t(p.head_to,p.head_en))}<span class="en">${esc(t(p.head_en,p.head_to))}</span>”</div>
+            <p class="pbody">${esc(t(p.body_to,p.body_en))}<span class="en">${esc(t(p.body_en,p.body_to))}</span></p>
+            <div class="prophet" style="margin-top:14px;padding:0;border:0;background:none"><div class="pq"><span class="by">${esc(p.by)}<small>${esc(t(p.role_to,p.role_en))}</small></span></div></div>
+          </div>
+        </div></div>`;
+    }
+    return `<div class="pillar">
+      ${imgslot(p.img,'wide','Fakahūʻi fakatātā ki he kupuʻi ní','Add an image for this theme')}
+      <div class="ptext">
+        <div class="ptag">${esc(t(p.tag_to,p.tag_en))}</div>
+        <div class="phead">${esc(t(p.head_to,p.head_en))}<span class="en">${esc(t(p.head_en,p.head_to))}</span></div>
+        <p class="pbody">${esc(t(p.body_to,p.body_en))}<span class="en">${esc(t(p.body_en,p.body_to))}</span></p>
+      </div></div>`;
+  }).join('');
+
   $('#panel-theme').innerHTML=`
     <div class="hero">
       <div class="area">${esc(t(THEME.area.to,THEME.area.en))}</div>
@@ -569,22 +666,39 @@ function renderTheme(){
       <span class="ref">${esc(THEME.ref)}</span>
       <div class="scripture">“${esc(t(THEME.scripture_to,THEME.scripture_en))}”<em>${esc(t(THEME.scripture_en,THEME.scripture_to))}</em></div>
     </div>
-    ${imgslot('hero','Fakahūʻi ha fakatātā temipale pe fāmili','Add a temple or family photo')}
+
+    <div class="prophet">
+      ${imgslot('prophet_oaks','profile','Fakatātā ʻo Palesiteni Oaks','Add President Oaks photo')}
+      <div class="pq">
+        <blockquote>“${esc(t(THEME.prophet_to,THEME.prophet_en))}”<span class="en">${esc(t(THEME.prophet_en,THEME.prophet_to))}</span></blockquote>
+        <span class="by">${esc(THEME.prophet_by)}<small>${esc(THEME.prophet_role)}</small></span>
+      </div>
+    </div>
+
+    ${imgslot('theme_banner','big','Fakahūʻi ha fakatātā lahi (temipale, fāmili, pe ʻātā)','Add a large image — temple, family, or artwork')}
+
     <div class="vision">
       <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>
       <div><div class="v-to">${esc(t(THEME.area.to,THEME.area.en))}</div><div class="v-en">${esc(t(THEME.area.en,THEME.area.to))} · ${t('Visone ʻElia Utah','Utah Area Vision')}</div></div>
     </div>
-    <div class="section-head" style="margin-top:30px"><div class="eyebrow">${t('Tukupaa ki he 2026','Goals for 2026')}</div><h2>${t('Ngaahi Tukupaa','Our Goals')}</h2></div>
+
+    <div class="section-head" style="margin-top:34px"><div class="eyebrow">${t('Tukupaa ki he 2026','Goals for 2026')}</div><h2>${t('Ngaahi Tukupaa','Our Goals')}</h2></div>
     <div class="goal-grid">${g}</div>
-    <div class="section-head" style="margin-top:30px"><div class="eyebrow">${t('Fakalototoʻa','Inspiration')}</div></div>
-    <div class="quotes">${q}</div>`;
+
+    <div class="section-head" style="margin-top:34px"><div class="eyebrow">${t('Tefitoʻi Tānaki','Pillars of Gathering')}</div><h2>${t('Fakalototoʻa','Inspiration')}</h2></div>
+    <div class="pillars">${pillars}</div>
+
+    <div class="cfm">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5a2 2 0 0 1 2-2h7v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg>
+      <div class="ct"><b>${esc(t('Haʻu ʻo Muimui ʻIate Au · 2026','Come, Follow Me · 2026'))}</b><span>${esc(t(CFM.to,CFM.en))}</span></div>
+    </div>`;
   bindImgSlots();
 }
 
 function renderLessons(){
   const cards=LESSONS.map((l,i)=>`
     <div class="lesson">
-      <div class="photo">${imgslot('lesson'+i,'','',true)}</div>
+      <div class="photo">${imgslot('lesson'+i,'fill','','')}</div>
       <div class="body">
         <span class="date${l.q3?' q3':''}">${esc(t(l.date_to,l.date_en))}</span>
         <h3>${esc(t(l.topic_to,l.topic_en))}</h3>
@@ -793,11 +907,12 @@ function share21(){
   else{navigator.clipboard.writeText(url).then(()=>toast(t('Kuo kopi ʻa e linkí','Link copied'))).catch(()=>toast(url));}
 }
 
-/* ---- image slots (theme/lessons) saved as data URLs ---- */
-function imgslot(id,capTo,capEn,small){
+/* ---- image slots (saved as data URLs; work fully offline) ---- */
+function imgslot(id,kind,capTo,capEn){
   const saved=state.img&&state.img[id];
-  return `<label class="imgslot${small?' small':''}${saved?' has':''}" data-img="${id}">
-    ${saved?`<img src="${saved}" alt="">`:`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>${capTo||capEn?`<span class="cap">${esc(t(capTo,capEn))}</span>`:`<span class="cap">${t('Fakahūʻi fakatātā','Add photo')}</span>`}`}
+  const cap = (capTo||capEn) ? esc(t(capTo,capEn)) : t('Fakahūʻi fakatātā','Add photo');
+  return `<label class="imgslot ${kind||'wide'}${saved?' has':''}" data-img="${id}">
+    ${saved?`<img src="${saved}" alt="">`:`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="cap">${cap}</span>`}
     <span class="rm" onclick="removeImg(event,'${id}')">${t('Toʻo','Remove')}</span>
     <input type="file" accept="image/*"></label>`;
 }
