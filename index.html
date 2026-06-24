@@ -482,17 +482,23 @@ footer b{color:var(--muted)}
 
 <script>
 /* =====================================================================
-   FIREBASE (optional). Leave as-is to run on-device (localStorage).
-   To enable shared cloud sync for the Tracker across the presidency,
-   paste your config below and set FIREBASE_ENABLED = true.
+   FIREBASE — West Jordan 8th Elders Quorum (Cloud Firestore).
+   Shared data (tracker, code key, lessons) syncs across the presidency.
+   Personal data (the 21-Day Promise) and photos stay on each device.
+   Firebase console still needs: create a Firestore database, and set
+   security rules that permit access (see notes shared on delivery).
    ===================================================================== */
-const FIREBASE_ENABLED = false;
+const FIREBASE_ENABLED = true;
 const firebaseConfig = {
-  apiKey:"YOUR_API_KEY", authDomain:"YOUR.firebaseapp.com",
-  databaseURL:"https://YOUR-default-rtdb.firebaseio.com",
-  projectId:"YOUR_PROJECT", appId:"YOUR_APP_ID"
+  apiKey: "AIzaSyCcE66UyZd1iwULbHiSZYJYLqmwan8a5lw",
+  authDomain: "wj8th-elders-quorum.firebaseapp.com",
+  projectId: "wj8th-elders-quorum",
+  storageBucket: "wj8th-elders-quorum.firebasestorage.app",
+  messagingSenderId: "115910206384",
+  appId: "1:115910206384:web:c754433b02eb662da8ac75"
 };
-const LEADER_PASSCODE = "wj8"; // change this — unlocks Tracker editing
+const LEADER_PASSCODE = "wj8"; // change this — unlocks Tracker & Lessons editing
+const SYNC_KEYS = new Set(['tracker','codes','lessons','lessonNote']); // shared; 'p21' & 'img' stay local
 
 /* ---------------- helpers ---------------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -510,30 +516,33 @@ if(IS_FOCUS){
   $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-promise'));
 }
 
-/* ---------------- storage layer (Firebase OR localStorage) ---------------- */
+/* ---------------- storage layer (Firestore for shared keys, else localStorage) ---------------- */
 const Store=(()=>{
-  let db=null, ready=false;
+  let fs=null, ready=false;
   async function init(){
     if(FIREBASE_ENABLED){
       try{
         await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js");
-        await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js");
-        firebase.initializeApp(firebaseConfig); db=firebase.database(); ready=true;
+        await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js");
+        firebase.initializeApp(firebaseConfig); fs=firebase.firestore(); ready=true;
         return 'cloud';
-      }catch(e){console.warn('Firebase failed, using local storage',e);}
+      }catch(e){console.warn('Firebase unavailable — using on-device storage.',e);}
     }
     ready=true; return 'local';
   }
   function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+  function saveLocal(key,val){try{localStorage.setItem('wj8_'+key,JSON.stringify(val));}catch(e){console.warn('Local save failed (storage full?)',e);}}
   async function get(key){
-    if(db){try{const snap=await db.ref(key).get();return snap.exists()?snap.val():null;}catch(e){}}
+    if(fs && SYNC_KEYS.has(key)){
+      try{const doc=await fs.collection('wj8').doc(key).get();if(doc.exists)return doc.data().v;}catch(e){console.warn('Cloud read failed',e);}
+    }
     const v=localStorage.getItem('wj8_'+key);return v?JSON.parse(v):null;
   }
   function set(key,val){
-    localStorage.setItem('wj8_'+key,JSON.stringify(val));
-    if(db){db.ref(key).set(val).catch(()=>{});}
+    saveLocal(key,val);
+    if(fs && SYNC_KEYS.has(key)){fs.collection('wj8').doc(key).set({v:val}).catch(e=>console.warn('Cloud write failed',e));}
   }
-  return {init,get,set,get mode(){return db?'cloud':'local';}};
+  return {init,get,set,get mode(){return fs?'cloud':'local';}};
 })();
 
 /* =====================================================================
@@ -1204,12 +1213,30 @@ function imgslot(id,kind,capTo,capEn){
     <span class="rm" onclick="removeImg(event,'${id}')">${t('Toʻo','Remove')}</span>
     <input type="file" accept="image/*"></label>`;
 }
+function downscaleImage(file, maxDim, cb){
+  const r=new FileReader();
+  r.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      let{width:w,height:h}=img;
+      if(w>maxDim||h>maxDim){const s=Math.min(maxDim/w,maxDim/h);w=Math.round(w*s);h=Math.round(h*s);}
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      try{cb(c.toDataURL('image/jpeg',0.82));}catch(_){cb(r.result);}
+    };
+    img.onerror=()=>cb(r.result);
+    img.src=r.result;
+  };
+  r.readAsDataURL(file);
+}
 function bindImgSlots(){
   $$('.imgslot input[type=file]').forEach(inp=>inp.addEventListener('change',e=>{
     const f=e.target.files[0];if(!f)return;const id=e.target.closest('.imgslot').dataset.img;
-    const r=new FileReader();r.onload=()=>{state.img=state.img||{};state.img[id]=r.result;Store.set('img',state.img);
-      const tab=$('.tab[aria-selected="true"]').dataset.tab;tab==='theme'?renderTheme():renderLessons();};
-    r.readAsDataURL(f);
+    const isProfile=e.target.closest('.imgslot').classList.contains('profile');
+    downscaleImage(f, isProfile?480:1280, dataUrl=>{
+      state.img=state.img||{};state.img[id]=dataUrl;Store.set('img',state.img);
+      const tab=$('.tab[aria-selected="true"]').dataset.tab;tab==='theme'?renderTheme():renderLessons();
+    });
   }));
 }
 function removeImg(ev,id){ev.preventDefault();ev.stopPropagation();if(state.img)delete state.img[id];Store.set('img',state.img||{});
@@ -1248,8 +1275,8 @@ $$('.tab').forEach(tab=>tab.addEventListener('click',()=>{
   state.lessons=await Store.get('lessons')||null;
   state.lessonNote=await Store.get('lessonNote')||null;
   $('#storage-note').textContent = (Store.mode==='cloud')
-    ? (LANG==='to'?'Fakahokohoko ʻi he ʻao (Firebase).':'Synced to the cloud (Firebase).')
-    : (LANG==='to'?'ʻOku tauhi ʻa e tracker ʻi he tēvaisí ni. Fakaava ʻa e Firebase ke vahevahe ki he kau takimuʻá.':'Tracker saves on this device. Enable Firebase to share across the presidency.');
+    ? (LANG==='to'?'Tracker, lesoni, mo e kī ʻoku fakahokohoko ʻi he ʻao (Firebase). Ko e palōmesi ʻaho ʻe 21 mo e ngaahi fakatātaá ʻoku tauhi ʻi he tēvaisí ni.':'Tracker, lessons, and code key sync to the cloud (Firebase). The 21-Day Promise and photos are saved on this device.')
+    : (LANG==='to'?'ʻOku tauhi ʻa e ngaahi fakaʻiló ʻi he tēvaisí ni.':'Saving on this device. (Cloud sync will connect when online.)');
   setLang(LANG);
 })();
 </script>
