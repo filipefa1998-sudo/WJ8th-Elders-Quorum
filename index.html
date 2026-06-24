@@ -8,10 +8,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="WJ8 EQ 2026" />
-<!-- Inline favicon: covenant stone glyph -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230D1726'/%3E%3Cpath d='M32 12 L46 24 L46 52 L18 52 L18 24 Z' fill='none' stroke='%23C8A24A' stroke-width='3'/%3E%3Cpath d='M32 12 L32 4 M27 8 h10' stroke='%23C8A24A' stroke-width='3'/%3E%3C/svg%3E" />
-<!-- PWA manifest (inline). For full offline on GitHub Pages, add a companion sw.js + icon-192/512.png. -->
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22WJ8%20Kolomu%20Kaumatua%202026%22%2C%22short_name%22%3A%22WJ8%20EQ%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230D1726%22%2C%22theme_color%22%3A%22%230D1726%22%7D" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="icon-192.png" />
+<!-- PWA: companion files in repo root — manifest.webmanifest, icon-192.png, icon-512.png, apple-touch-icon.png -->
+<link rel="manifest" href="manifest.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -81,9 +82,10 @@ header{
 
 /* ---------- Tabs ---------- */
 nav.tabs{position:sticky;top:0;z-index:30;background:rgba(11,20,32,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-solid)}
-body.focus-promise nav.tabs{display:none}
-body.focus-promise .yr{display:none}
-body.focus-promise footer{display:none}
+body.focus-promise nav.tabs,body.focus-lessons nav.tabs{display:none}
+body.focus-promise .yr,body.focus-lessons .yr{display:none}
+body.focus-promise footer,body.focus-lessons footer{display:none}
+body.focus-lessons .editbar{display:none}
 .tabs-inner{max-width:1080px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:0 8px}
 .tabs-inner::-webkit-scrollbar{display:none}
 .tab{flex:0 0 auto;background:transparent;border:0;color:var(--muted);padding:15px 14px 13px;font-weight:700;font-size:13.5px;letter-spacing:.01em;border-bottom:2.5px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:7px}
@@ -199,7 +201,9 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .pillar.with-profile .pinner{flex:1;min-width:0}
 
 /* come-follow-me note */
-.cfm{display:flex;gap:14px;align-items:center;margin-top:24px;padding:18px 22px;border-radius:14px;border:1px solid var(--line-solid);background:#11243a}
+.cfm{display:flex;gap:14px;align-items:center;margin-top:24px;padding:18px 22px;border-radius:14px;border:1px solid var(--line-solid);background:#11243a;text-decoration:none;transition:border-color .15s,background .15s}
+.cfm:hover{border-color:var(--gold-dim);background:#13294a}
+.cfm .go{flex:0 0 auto;width:18px;height:18px;color:var(--gold);margin-left:auto;opacity:.8}
 .cfm .ico{flex:0 0 auto;width:30px;height:30px;color:var(--gold)}
 .cfm .ct b{display:block;color:var(--cream);font-size:15.5px}
 .cfm .ct span{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
@@ -303,7 +307,8 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .months{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
 .mon{display:flex;flex-direction:column;gap:5px}
 .mon span{font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--muted-2);text-transform:uppercase}
-.mon textarea,.statusinput{width:100%;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:9px;padding:8px 10px;font-family:inherit;font-size:14px;resize:vertical}
+.mon textarea,.statusinput,.nameinput{width:100%;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:9px;padding:8px 10px;font-family:inherit;font-size:14px;resize:vertical}
+.nameinput{font-weight:700;font-size:15px}
 .mon textarea{min-height:46px}
 .mon textarea:disabled,.statusinput:disabled{opacity:.78;cursor:default}
 textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
@@ -311,10 +316,10 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .legend{margin-top:18px;padding:16px 18px;border-radius:13px;border:1px solid var(--line-solid);background:#0f1d2e}
 .legend h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
 .legend p{font-size:13.5px;color:var(--muted);margin:0 0 12px}
-.codes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
-.code{display:flex;align-items:center;gap:9px}
+.codes{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px}
+.code{display:flex;align-items:center;gap:9px;min-width:0}
 .code .c{flex:0 0 auto;font-weight:800;color:var(--gold-soft);font-size:13px;min-width:42px}
-.code input{flex:1;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:8px;padding:6px 9px;font-size:12.5px}
+.code input{flex:1;min-width:0;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:8px;padding:6px 9px;font-size:12.5px}
 
 /* reactivation goal banner */
 .react-goal{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;margin-bottom:18px;padding:16px 20px;border-radius:14px;border:1px solid var(--line-solid);background:linear-gradient(120deg,#16273e,#101d2e)}
@@ -378,6 +383,10 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .promise-intro p{font-size:15.5px;color:var(--ink);margin:14px 0 0;max-width:64ch}
 .promise-intro p .en{display:block;color:var(--muted);font-size:14px;margin-top:8px}
 .promise-intro .vref{margin-top:14px;font-style:italic;font-family:'Playfair Display',serif;color:var(--gold);font-size:14.5px}
+.promise-intro.has-side{display:flex;gap:22px;align-items:center}
+.promise-intro.has-side .pi-text{flex:1;min-width:0}
+.promise-intro.has-side .pi-side{flex:0 0 34%;max-width:250px;min-width:0}
+@media(max-width:640px){.promise-intro.has-side{flex-direction:column;align-items:stretch}.promise-intro.has-side .pi-side{flex:none;max-width:none;width:100%}}
 
 .promise-progress{display:flex;align-items:center;gap:14px;margin:18px 0;padding:16px 20px;border-radius:14px;border:1px solid var(--line-solid);background:#11243a}
 .promise-progress .big{font-family:'Playfair Display',serif;font-size:30px;color:var(--gold-soft);font-variant-numeric:tabular-nums}
@@ -390,7 +399,7 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 .blockhead .en{font-size:13.5px;color:var(--muted)}
 
 .prayfor{display:grid;gap:8px}
-.prayfor input{background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:10px;padding:11px 13px;font-size:14px;font-family:inherit}
+.prayfor input{width:100%;min-width:0;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:10px;padding:11px 13px;font-size:14px;font-family:inherit}
 
 .daygrid{display:grid;gap:8px}
 .dayrow{display:grid;grid-template-columns:46px 1fr;gap:10px;align-items:stretch;border:1px solid var(--line-solid);border-radius:12px;background:linear-gradient(120deg,#15263c,#101c2d);overflow:hidden}
@@ -416,7 +425,7 @@ textarea:focus,input:focus{border-color:var(--gold-dim);background:#0b1521}
 
 .contacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
 .contact{display:grid;grid-template-columns:1fr 130px;gap:8px}
-.contact input{background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13.5px;font-family:inherit}
+.contact input{width:100%;min-width:0;background:#0c1726;border:1px solid var(--line-solid);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13.5px;font-family:inherit}
 .contact .ph{font-variant-numeric:tabular-nums}
 
 .toolbar-21{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px}
@@ -430,8 +439,36 @@ footer b{color:var(--muted)}
 
 @media (max-width:560px){
   .lesson{grid-template-columns:1fr}
-  .lesson .photo{min-height:120px;border-right:0;border-bottom:1px solid var(--line-solid)}
+  .lesson .photo{min-height:auto;border-right:0;padding:16px 0 4px}
+  .lesson .photo .imgslot.profile{width:96px;height:96px;min-width:96px}
   .contact{grid-template-columns:1fr}
+  header{padding:16px 14px 13px}
+  .crest{flex-wrap:wrap;gap:9px 11px}
+  .crest .glyph{width:40px;height:40px}
+  .crest h1{font-size:22px}
+  .langtoggle{margin-left:auto}
+  .langtoggle button{padding:7px 11px;font-size:11.5px}
+  nav.tabs .tabs-inner{padding:0 6px}
+  .tab{padding:13px 11px 11px;font-size:12.5px}
+  main{padding:18px 14px 72px}
+  .hero{padding:22px 17px}
+  .hero h2{max-width:none}
+  .prophet{padding:18px 16px;gap:14px}
+  .cfm{padding:15px 16px;gap:11px}
+  .goal-grid{grid-template-columns:1fr;gap:11px}
+  .goal.card{padding:16px 16px}
+  .pillars{gap:13px}
+  .promise-intro{padding:18px 16px}
+  .months{grid-template-columns:1fr 1fr}
+  .toolbar-21{gap:8px}
+  .toolbar-21 .btn{flex:1 1 44%;justify-content:center}
+  .member .mhead{padding:13px 14px}
+  .editbar .btn{flex:1 1 auto;justify-content:center}
+}
+@media (max-width:380px){
+  .months{grid-template-columns:1fr}
+  .checks{gap:10px}
+  .chk{font-size:11px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
@@ -456,7 +493,7 @@ footer b{color:var(--muted)}
 
 <header>
   <div class="crest">
-    <svg class="glyph" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="13" fill="#0c1726" stroke="#2A3C57"/><path d="M32 13 L46 25 L46 51 L18 51 L18 25 Z" fill="none" stroke="#C8A24A" stroke-width="2.4"/><path d="M32 13 L32 6 M28 9 h8" stroke="#C8A24A" stroke-width="2.4"/><path d="M26 51 L26 38 h12 v13" fill="none" stroke="#9C7E36" stroke-width="2"/></svg>
+    <svg class="glyph" viewBox="0 0 64 64" aria-label="WJ8"><rect width="64" height="64" rx="14" fill="#0c1726" stroke="#2A3C57"/><rect x="4.5" y="4.5" width="55" height="55" rx="10.5" fill="none" stroke="#C8A24A" stroke-width="1.3" opacity=".55"/><text x="32" y="40.5" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="800" font-size="23" letter-spacing="-.5" fill="#C8A24A">WJ8</text></svg>
     <div class="titles">
       <div class="eyebrow" data-to="Uooti West Jordan 8 · Kōlomu Kaumatuʻa" data-en="West Jordan 8th Ward · Elders Quorum">Uooti West Jordan 8 · Kōlomu Kaumatuʻa</div>
       <h1><span id="apptitle">Taumuʻa &amp; Tukupaa</span> <span class="yr" style="color:var(--gold)">2026</span></h1>
@@ -524,12 +561,17 @@ const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
 
 /* Focused share mode: opening a "#promise" link shows ONLY the fillable 21-Day Promise form */
-const IS_FOCUS = location.hash.toLowerCase().indexOf('promise')>=0;
-function syncFocusHeader(){const el=$('#apptitle');if(el&&document.body.classList.contains('focus-promise'))el.textContent=(LANG==='to'?'Palōmesi ʻAho ʻe 21':'21-Day Promise');}
+const _fh = location.hash.toLowerCase();
+const FOCUS = _fh.indexOf('promise')>=0 ? 'promise' : (_fh.indexOf('lessons')>=0 || _fh.indexOf('lesoni')>=0) ? 'lessons' : null;
+const IS_FOCUS = !!FOCUS;
+function syncFocusHeader(){const el=$('#apptitle');if(!el)return;
+  if(document.body.classList.contains('focus-promise'))el.textContent=(LANG==='to'?'Palōmesi ʻAho ʻe 21':'21-Day Promise');
+  else if(document.body.classList.contains('focus-lessons'))el.textContent=(LANG==='to'?'Lesoni Sapate':'Sunday Lessons');
+}
 if(IS_FOCUS){
-  document.body.classList.add('focus-promise');
-  $$('.tab').forEach(tb=>tb.setAttribute('aria-selected',tb.dataset.tab==='promise'));
-  $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-promise'));
+  document.body.classList.add('focus-'+FOCUS);
+  $$('.tab').forEach(tb=>tb.setAttribute('aria-selected',tb.dataset.tab===FOCUS));
+  $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+FOCUS));
 }
 
 /* ---------------- storage layer (Firestore for shared keys, else localStorage) ---------------- */
@@ -856,10 +898,11 @@ function renderTheme(){
     <div class="section-head" style="margin-top:34px"><div class="eyebrow">${t('Tefitoʻi Tānaki','Pillars of Gathering')}</div><h2>${t('Fakalototoʻa','Inspiration')}</h2></div>
     <div class="pillars">${pillars}</div>
 
-    <div class="cfm">
+    <a class="cfm" href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026?lang=eng" target="_blank" rel="noopener">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5a2 2 0 0 1 2-2h7v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2z"/></svg>
       <div class="ct"><b>${esc(t('Haʻu ʻo Muimui ʻIate Au · 2026','Come, Follow Me · 2026'))}</b><span>${esc(t(CFM.to,CFM.en))}</span></div>
-    </div>`;
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>`;
   bindImgSlots();
   bindTheme();
 }
@@ -957,7 +1000,15 @@ function renderLessons(){
         <div class="gbody">${esc(t(LESSON_GUIDE.body_to,LESSON_GUIDE.body_en))}<span class="en">${esc(t(LESSON_GUIDE.body_en,LESSON_GUIDE.body_to))}</span></div></div>
     </div>
     <div class="lessons">${cards}</div>
-    ${editMode?`<button class="add-lesson" onclick="addLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${t('Tānaki ha lesoni foʻou','Add a lesson')}</button>`:''}`;
+    ${editMode?`<button class="add-lesson" onclick="addLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${t('Tānaki ha lesoni foʻou','Add a lesson')}</button>`:''}
+    <div class="section-head" style="margin-top:30px"><div class="eyebrow">${t('Vahevahe','Share')}</div><h2 style="font-size:clamp(19px,4.6vw,24px)">${t('Vahevahe ʻa e ngaahi lesoní','Share these lessons')}</h2>
+      <p>${t('Fekauʻi ʻa e lisi ʻo e ngaahi lesoní ki he kāingalotú ʻi he pōpoaki pe ʻimeili.','Send the lesson schedule to the quorum by text or email.')}</p></div>
+    <div class="toolbar-21">
+      <button class="btn primary" onclick="shareLessons()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>${t('Vahevahe','Share')}</button>
+      <button class="btn" onclick="textLessons()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.6 8.6 0 0 1-3.9-.9L3 21l1.9-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>${t('Pōpoaki','Text')}</button>
+      <button class="btn" onclick="emailLessons()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>${t('ʻImeili','Email')}</button>
+      <button class="btn ghost" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>${t('Pulusi','Print')}</button>
+    </div>`;
   bindImgSlots();
   bindLessons();
 }
@@ -991,6 +1042,7 @@ function saveLessons(){if(state.lessons)Store.set('lessons',state.lessons);if(st
 let openMembers=new Set();
 function memData(id){return state.tracker[id]||{};}
 function mState(id){return state.tracker[id]=state.tracker[id]||{};}
+function memName(m){return ((memData(m.id).name||'').trim())||m.name;}
 function effGroup(m){return memData(m.id).group||m.defaultGroup;}
 function indsDone(id){const d=memData(id);return d.ind?Object.values(d.ind).filter(Boolean).length:0;}
 function memStatus(m){const d=memData(m.id);return d.status!==undefined?d.status:m.status;}
@@ -1008,7 +1060,7 @@ function renderMember(m){
   const moveOpts=GROUP_ORDER.map(gg=>`<option value="${gg}" ${gg===gid?'selected':''}>${esc(t(GROUP_META[gg].tag_to,GROUP_META[gg].tag_en))}</option>`).join('');
   return `<div class="member${open}${completed?' done-cov':''}" data-mid="${m.id}">
     <div class="mhead" onclick="toggleMember('${m.id}')">
-      <div class="mname"><div class="nm">${esc(m.name)}</div>
+      <div class="mname"><div class="nm">${esc(memName(m))}</div>
         ${status?`<div class="status">${esc(status)}</div>`:''}
         ${la?`<div class="lastact">${t('Ngāue fakamuimui','Last note')}: <b>${esc(t(la[1],la[2]))}</b></div>`:''}
       </div>
@@ -1018,6 +1070,8 @@ function renderMember(m){
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
     </div>
     <div class="mbody">
+      ${editMode?`<div class="field"><label>${t('Hingoa ʻo e Mēmipá','Member name')}</label>
+        <input class="nameinput" data-mid="${m.id}" data-name="1" value="${esc(memName(m))}" placeholder="${t('Hingoa…','Name…')}"></div>`:''}
       <div class="field"><label>${t('Tuʻunga / Fakaʻilonga','Status / Key indicator')}</label>
         <input class="statusinput" data-mid="${m.id}" data-status="1" value="${esc(status)}" ${editMode?'':'disabled'} placeholder="${t('e.g. PM; HNM','e.g. PM; HNM')}"></div>
       <div class="field"><label>${t('Ngaahi Fakaʻilonga Tefito (a–i)','Key Indicators (a–i)')}</label><div class="indicators">${indHtml}</div></div>
@@ -1038,7 +1092,7 @@ function renderTracker(){
 
   const SHORT={miss:['Fakafaifekau','Missionary'],strg:['Fakamālohia','Strengthening'],pe:['Teuteu Kaumatuʻa','Prospective'],covenant:['Hala Fuakava','Covenant Path']};
   const tiles=GROUP_ORDER.map(gid=>`<div class="tile${GROUP_META[gid].completed?' completed':''}"><div class="num">${buckets[gid].length}</div><div class="lbl">${esc(t(SHORT[gid][0],SHORT[gid][1]))}</div></div>`).join('');
-  const chip=(m,cls)=>`<button class="chip ${cls}" onclick="focusMember('${m.id}')">${esc(m.name)}<span class="cnt">${indsDone(m.id)}/9</span></button>`;
+  const chip=(m,cls)=>`<button class="chip ${cls}" onclick="focusMember('${m.id}')">${esc(memName(m))}<span class="cnt">${indsDone(m.id)}/9</span></button>`;
   const needsChips=needs.length?needs.map(m=>chip(m,'warn')).join(''):`<span class="none">${t('ʻOku ʻi ai ha fakalakalaka ʻa e mēmipa kotoa.','Every member has active progress.')}</span>`;
   const readyChips=ready.length?ready.map(m=>chip(m,'ready')).join(''):`<span class="none">${t('ʻOku teʻeki ofi ha taha ki he hiki.','No one is close to advancing yet.')}</span>`;
 
@@ -1153,10 +1207,13 @@ function renderPromise(){
 
   $('#panel-promise').innerHTML=`
     <div class="section-head"><div class="eyebrow">${t('Ngāue Fakafaifekau','Member Missionary Work')}</div><h2>${t('Palōmesi ʻAho ʻe 21','The 21-Day Promise')}</h2></div>
-    <div class="promise-intro">
-      <div class="formula">${t('TUI','FAITH')} + ${t('LOTU','PRAYER')} + <em>${t('NGĀUE','ACTION')}</em> = ${t('MANA','MIRACLES')}</div>
-      <p>${esc(t(intro_to,intro_en))}<span class="en">${esc(t(intro_en,intro_to))}</span></p>
-      <div class="vref">${esc(t(vref_to,vref_en))}</div>
+    <div class="promise-intro ${(editMode||(state.img&&state.img['promise_img']))?'has-side':''}">
+      <div class="pi-text">
+        <div class="formula">${t('TUI','FAITH')} + ${t('LOTU','PRAYER')} + <em>${t('NGĀUE','ACTION')}</em> = ${t('MANA','MIRACLES')}</div>
+        <p>${esc(t(intro_to,intro_en))}<span class="en">${esc(t(intro_en,intro_to))}</span></p>
+        <div class="vref">${esc(t(vref_to,vref_en))}</div>
+      </div>
+      ${(editMode||(state.img&&state.img['promise_img']))?`<div class="pi-side">${imgslot('promise_img','heroside','Fakahūʻi ha fakatātā','Add a photo')}</div>`:''}
     </div>
 
     <div class="promise-progress">
@@ -1187,6 +1244,7 @@ function renderPromise(){
     </div>
     <p class="savednote">${t('ʻOku tauhi ʻa e fakaʻiló ʻi he tēvaisí ni. Ko e palōmesi fakafoʻituituí — ʻoku ʻikai vahevahe ki he ʻētita.','Your progress is saved on this device. This worksheet is personal — it is not shared with leaders.')}</p>`;
   bindPromise();
+  bindImgSlots();
 }
 
 /* =====================================================================
@@ -1207,6 +1265,11 @@ function bindTracker(){
   $$('#panel-tracker .statusinput').forEach(inp=>inp.addEventListener('input',e=>{
     mState(e.target.dataset.mid).status=e.target.value;saveTrackerDebounced();
   }));
+  $$('#panel-tracker .nameinput').forEach(inp=>inp.addEventListener('input',e=>{
+    mState(e.target.dataset.mid).name=e.target.value;saveTrackerDebounced();
+    const mem=e.target.closest('.member'),nm=mem&&mem.querySelector('.mhead .nm');
+    if(nm)nm.textContent=e.target.value.trim()||'—';
+  }));
   $$('#panel-tracker .code input').forEach(inp=>inp.addEventListener('input',e=>{
     state.codes[e.target.dataset.code]=e.target.value;saveTrackerDebounced();
   }));
@@ -1225,7 +1288,7 @@ function toggleEdit(){
     if(code!==LEADER_PASSCODE){toast(t('Fika hala','Wrong passcode'));return;}
     editMode=true;toast(t('Ava ki he fakatonutonú','Editing unlocked'));
   }else{editMode=false;toast(t('Kuo tāpuni','Editing locked'));}
-  renderTheme();renderTracker();renderLessons();
+  renderTheme();renderTracker();renderLessons();renderPromise();
 }
 
 function bindPromise(){
@@ -1256,6 +1319,31 @@ function share21(){
   const title=t('WJ8 · Palōmesi ʻAho ʻe 21','WJ8 · 21-Day Promise');
   if(navigator.share){navigator.share({title,text:t('Ko e palōmesi ʻaho ʻe 21 — ʻahiʻahiʻi ia.','Try the 21-Day Promise.'),url}).catch(()=>{});}
   else{navigator.clipboard.writeText(url).then(()=>toast(t('Kuo kopi ʻa e link ʻo e palōmesí','Promise form link copied'))).catch(()=>toast(url));}
+}
+function lessonsShareText(){
+  const url=location.href.split('#')[0].split('?')[0]+'#lessons';
+  const head=t('WJ8 Lesoni Sapate — Kōlomu Kaumatuʻa','WJ8 Sunday Lessons — Elders Quorum');
+  const lines=lessonsArr().map(l=>{
+    const date=t(l.date_to,l.date_en)||'', topic=t(l.topic_to,l.topic_en)||'', who=l.who||'';
+    return '• '+[date,topic,who].filter(Boolean).join(' — ');
+  });
+  return head+'\n\n'+lines.join('\n')+'\n\n'+url;
+}
+function shareLessons(){
+  const url=location.href.split('#')[0].split('?')[0]+'#lessons';
+  const title=t('WJ8 · Lesoni Sapate','WJ8 · Sunday Lessons');
+  const text=lessonsShareText();
+  if(navigator.share){navigator.share({title,text,url}).catch(()=>{});}
+  else{navigator.clipboard.writeText(text).then(()=>toast(t('Kuo kopi ʻa e lisi lesoní','Lesson list copied'))).catch(()=>toast(url));}
+}
+function emailLessons(){
+  const subj=encodeURIComponent(t('WJ8 Lesoni Sapate','WJ8 Sunday Lessons'));
+  const body=encodeURIComponent(lessonsShareText());
+  location.href='mailto:?subject='+subj+'&body='+body;
+}
+function textLessons(){
+  const body=encodeURIComponent(lessonsShareText());
+  location.href='sms:?&body='+body;
 }
 
 /* ---- image slots (saved as data URLs; work fully offline) ---- */
