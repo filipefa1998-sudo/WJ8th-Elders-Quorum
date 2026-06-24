@@ -212,8 +212,10 @@ main{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
 .notebar{display:flex;gap:12px;align-items:flex-start;padding:15px 18px;border-radius:13px;border:1px solid var(--line-solid);background:#11243a;margin-bottom:8px;font-size:14.5px;color:var(--muted)}
 .notebar .badge{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold);text-transform:uppercase}
 .lessons{margin-top:18px;display:grid;gap:13px}
-.lesson{display:grid;grid-template-columns:120px 1fr;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-solid);background:linear-gradient(120deg,#15263c,#101d2e)}
-.lesson .photo{position:relative;background:#0c1726;border-right:1px solid var(--line-solid);min-height:100%;display:flex;align-items:center;justify-content:center}
+.lesson{display:grid;grid-template-columns:132px 1fr;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line-solid);background:linear-gradient(120deg,#15263c,#101d2e)}
+.lesson.nophoto{grid-template-columns:1fr}
+.lesson .photo{position:relative;min-height:100%;display:flex;align-items:center;justify-content:center;padding:14px}
+.lesson .photo .imgslot.profile{width:104px;height:104px;min-width:104px}
 .lesson .body{padding:16px 18px}
 .lesson .date{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;color:#1a1206;background:var(--gold);padding:4px 10px;border-radius:999px}
 .lesson .date.q3{background:var(--sky);color:#06202c}
@@ -887,9 +889,11 @@ function renderLessons(){
   const note=lessonNoteVal();
   const cards=list.map((l,i)=>{
     const teacher=(l.teacher||'').trim();
-    const photo=`<div class="photo">${imgslot('lesson'+i,'fill','','')}</div>`;
+    const hasImg=!!(state.img&&state.img['lesson'+i]);
+    const showPhoto=editMode||hasImg;
+    const photo=showPhoto?`<div class="photo">${imgslot('lesson'+i,'profile','Fakatātā','Photo')}</div>`:'';
     if(editMode){
-      return `<div class="lesson">${photo}
+      return `<div class="lesson${showPhoto?'':' nophoto'}">${photo}
         <div class="body"><div class="ledit">
           <div class="row">
             <div class="one"><label>${t('ʻAho (Lea Faka-Tonga)','Date (Tongan)')}</label><input data-li="${i}" data-field="date_to" value="${esc(l.date_to||'')}"></div>
@@ -913,7 +917,7 @@ function renderLessons(){
           <button class="del" data-del-li="${i}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>${t('Tāmateʻi ʻa e lesoní','Delete lesson')}</button>
         </div></div></div>`;
     }
-    return `<div class="lesson">${photo}
+    return `<div class="lesson${showPhoto?'':' nophoto'}">${photo}
       <div class="body">
         <span class="date">${esc(t(l.date_to,l.date_en))}</span>
         <h3>${esc(t(l.topic_to,l.topic_en))}</h3>
