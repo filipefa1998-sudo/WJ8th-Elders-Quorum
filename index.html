@@ -479,17 +479,21 @@ footer b{color:var(--muted)}
 /* ---------- Print (21-day worksheet) ---------- */
 @media print{
   body{background:#fff;color:#111}
-  header,nav.tabs,.langtoggle,.editbar,.toolbar-21,footer,.toast,.imgslot .rm{display:none!important}
+  header,nav.tabs,.langtoggle,.editbar,.toolbar-21,footer,.toast,.imgslot .rm,.screen-only{display:none!important}
   main{max-width:none;padding:0}
   .panel{display:none!important}
-  .panel#panel-promise{display:block!important}
-  .promise-intro,.promise-progress,.commit,.dayrow,.contact input,.prayfor input{background:#fff!important;border-color:#999!important;box-shadow:none!important}
-  .promise-intro .formula,.daynum,.scrip a,.blockhead h3,.promise-progress .big{color:#1a1206!important}
-  .promise-intro p,.commit .txt,.scrip{color:#111!important}
-  .bi-en,.en,.sub,.lbl,.promise-progress .lbl{color:#444!important}
+  .panel.active{display:block!important}             /* print whichever tab is open */
+  /* make every printed card white and its text dark so nothing is invisible on paper */
+  .lesson,.guide,.notebar,.promise-intro,.promise-progress,.commit,.dayrow,.contact input,.prayfor input,
+  .goal.card,.member,.dash,.legend,.cfm,.hero,.prophet,.pillar,.vision{background:#fff!important;border-color:#bbb!important;box-shadow:none!important}
+  .panel.active, .panel.active *{color:#1a1206!important}
+  .en,.sub,.lbl,.topic-en,.summary .en,.who,.teacher-row .tl,.teacher-row .tv,.gbody .en,.gtitle .en,.promise-progress .lbl{color:#555!important}
+  .lesson,.guide,.member,.goal.card,.commit,.dayrow,.contact{break-inside:avoid;page-break-inside:avoid}
+  .lesson .photo{background:transparent!important;border:0!important}
+  .lesson .date,.guide .gref{background:#e7cf86!important;color:#1a1206!important}
   .dayrow.full{background:#f3f8f3!important}
-  a{color:#111!important}
-  input,textarea{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:#1a1206!important;text-decoration:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
@@ -1010,7 +1014,7 @@ function renderLessons(){
     </div>
     <div class="lessons">${cards}</div>
     ${editMode?`<button class="add-lesson" onclick="addLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${t('Tānaki ha lesoni foʻou','Add a lesson')}</button>`:''}
-    <div class="section-head" style="margin-top:30px"><div class="eyebrow">${t('Vahevahe','Share')}</div><h2 style="font-size:clamp(19px,4.6vw,24px)">${t('Vahevahe ʻa e ngaahi lesoní','Share these lessons')}</h2>
+    <div class="section-head screen-only" style="margin-top:30px"><div class="eyebrow">${t('Vahevahe','Share')}</div><h2 style="font-size:clamp(19px,4.6vw,24px)">${t('Vahevahe ʻa e ngaahi lesoní','Share these lessons')}</h2>
       <p>${t('Fekauʻi ʻa e lisi ʻo e ngaahi lesoní ki he kāingalotú ʻi he pōpoaki pe ʻimeili.','Send the lesson schedule to the quorum by text or email.')}</p></div>
     <div class="toolbar-21">
       <button class="btn primary" onclick="shareLessons()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>${t('Vahevahe','Share')}</button>
